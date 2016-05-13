@@ -4,6 +4,7 @@ using System.Collections;
 public class BlockBehaviour : MonoBehaviour {
 
     private bool isActivated;
+
     public bool IsActivated {
         get
         {
@@ -32,7 +33,7 @@ public class BlockBehaviour : MonoBehaviour {
 
     protected void Activate() {
         Debug.Log("Block activated");
-
+        this.transform.Translate(0, 0, -2);
     }
 
     protected void Deactivate()
@@ -45,7 +46,6 @@ public class BlockBehaviour : MonoBehaviour {
 	}
 	
 	void Update () {
-	
 	}   
 
     void OnMouseDown() {
