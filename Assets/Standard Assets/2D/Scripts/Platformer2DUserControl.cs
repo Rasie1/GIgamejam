@@ -1,8 +1,8 @@
+using System;
 using UnityEngine;
-using CnControls;
+using UnityStandardAssets.CrossPlatformInput;
 
-// Just in case so no "duplicate definition" stuff shows up
-namespace UnityStandardAssets.Copy._2D
+namespace UnityStandardAssets._2D
 {
     [RequireComponent(typeof (PlatformerCharacter2D))]
     public class Platformer2DUserControl : MonoBehaviour
@@ -15,21 +15,25 @@ namespace UnityStandardAssets.Copy._2D
         {
             m_Character = GetComponent<PlatformerCharacter2D>();
         }
-        
+
+
         private void Update()
         {
             if (!m_Jump)
             {
                 // Read the jump input in Update so button presses aren't missed.
-                m_Jump = CnInputManager.GetButtonDown("Jump");
+                m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
             }
         }
-        
+
+
         private void FixedUpdate()
         {
-            float h = CnInputManager.GetAxis("Horizontal");
+            // Read the inputs.
+            bool crouch = Input.GetKey(KeyCode.LeftControl);
+            float h = CrossPlatformInputManager.GetAxis("Horizontal");
             // Pass all parameters to the character control script.
-            m_Character.Move(h, m_Jump);
+            m_Character.Move(h, crouch, m_Jump);
             m_Jump = false;
         }
     }

@@ -1,8 +1,8 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-// Just in case so no "duplicate definition" stuff shows up
-namespace UnityStandardAssets.Copy._2D
+namespace UnityStandardAssets._2D
 {
     public class Restarter : MonoBehaviour
     {
@@ -10,7 +10,7 @@ namespace UnityStandardAssets.Copy._2D
         {
             if (other.tag == "Player")
             {
-                Application.LoadLevel(Application.loadedLevelName);
+                SceneManager.LoadScene(SceneManager.GetSceneAt(0).path);
             }
         }
     }
