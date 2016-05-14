@@ -33,7 +33,7 @@ public class Generator : MonoBehaviour {
         numOfBioms = 0;
 
         //D.N.O.
-        blockPrs[numOfBioms] = new int[7];
+        blockPrs[numOfBioms] = new int[8];
         blockPrs[numOfBioms][0] = 0;
         blockPrs[numOfBioms][1] = 0;
         blockPrs[numOfBioms][2] = 0;
@@ -41,10 +41,11 @@ public class Generator : MonoBehaviour {
         blockPrs[numOfBioms][4] = 0;
         blockPrs[numOfBioms][5] = 0;
         blockPrs[numOfBioms][6] = 100;
+        blockPrs[numOfBioms][7] = 0;
         ++numOfBioms;
 
         //BIOM 1
-        blockPrs[numOfBioms] = new int[7];
+        blockPrs[numOfBioms] = new int[8];
         blockPrs[numOfBioms][0] = 100;
         blockPrs[numOfBioms][1] = 0;
         blockPrs[numOfBioms][2] = 0;
@@ -52,10 +53,11 @@ public class Generator : MonoBehaviour {
         blockPrs[numOfBioms][4] = 95;
         blockPrs[numOfBioms][5] = 0;
         blockPrs[numOfBioms][6] = 0;
+        blockPrs[numOfBioms][7] = 0;
         ++numOfBioms;
 
         //BIOM 2
-        blockPrs[numOfBioms] = new int[7];
+        blockPrs[numOfBioms] = new int[8];
         blockPrs[numOfBioms][0] = 75;
         blockPrs[numOfBioms][1] = 0;
         blockPrs[numOfBioms][2] = 100;
@@ -63,10 +65,11 @@ public class Generator : MonoBehaviour {
         blockPrs[numOfBioms][4] = 90;
         blockPrs[numOfBioms][5] = 0;
         blockPrs[numOfBioms][6] = 0;
+        blockPrs[numOfBioms][7] = 0;
         ++numOfBioms;
 
         //BIOM 3
-        blockPrs[numOfBioms] = new int[7];
+        blockPrs[numOfBioms] = new int[8];
         blockPrs[numOfBioms][0] = 50;
         blockPrs[numOfBioms][1] = 0;
         blockPrs[numOfBioms][2] = 100;
@@ -74,10 +77,11 @@ public class Generator : MonoBehaviour {
         blockPrs[numOfBioms][4] = 90;
         blockPrs[numOfBioms][5] = 0;
         blockPrs[numOfBioms][6] = 0;
+        blockPrs[numOfBioms][7] = 0;
         ++numOfBioms;
 
         //BIOM 4
-        blockPrs[numOfBioms] = new int[7];
+        blockPrs[numOfBioms] = new int[8];
         blockPrs[numOfBioms][0] = 25;
         blockPrs[numOfBioms][1] = 0;
         blockPrs[numOfBioms][2] = 75;
@@ -85,10 +89,11 @@ public class Generator : MonoBehaviour {
         blockPrs[numOfBioms][4] = 90;
         blockPrs[numOfBioms][5] = 0;
         blockPrs[numOfBioms][6] = 0;
+        blockPrs[numOfBioms][7] = 0;
         ++numOfBioms;
 
         //BIOM 5
-        blockPrs[numOfBioms] = new int[7];
+        blockPrs[numOfBioms] = new int[8];
         blockPrs[numOfBioms][0] = 25;
         blockPrs[numOfBioms][1] = 0;
         blockPrs[numOfBioms][2] = 50;
@@ -96,10 +101,11 @@ public class Generator : MonoBehaviour {
         blockPrs[numOfBioms][4] = 90;
         blockPrs[numOfBioms][5] = 0;
         blockPrs[numOfBioms][6] = 0;
+        blockPrs[numOfBioms][7] = 0;
         ++numOfBioms;
 
         //BIOM 6
-        blockPrs[numOfBioms] = new int[7];
+        blockPrs[numOfBioms] = new int[8];
         blockPrs[numOfBioms][0] = 25;
         blockPrs[numOfBioms][1] = 50;
         blockPrs[numOfBioms][2] = 75;
@@ -107,6 +113,7 @@ public class Generator : MonoBehaviour {
         blockPrs[numOfBioms][4] = 85;
         blockPrs[numOfBioms][5] = 0;
         blockPrs[numOfBioms][6] = 0;
+        blockPrs[numOfBioms][7] = 0;
         ++numOfBioms;
 
 
@@ -209,6 +216,11 @@ public class Generator : MonoBehaviour {
                         {
                             (obj as GameObject).GetComponent<Renderer>().material = greyMat;
                             (obj as GameObject).AddComponent<DisabledActivatedBlockBehaviour>();
+                        }
+                        else if (rColor < (float)blockPrs[biom][7] / 100)
+                        {
+                            (obj as GameObject).GetComponent<Renderer>().material = greyMat;
+                            (obj as GameObject).AddComponent<BouncingBlockBehaviour>();
                         }
                         else {
                             (obj as GameObject).GetComponent<Renderer>().material = yellowMat;
