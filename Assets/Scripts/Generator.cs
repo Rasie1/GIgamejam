@@ -21,7 +21,7 @@ public class Generator : MonoBehaviour {
         {
             for (int i = 0; i < 8; ++i)
             {
-                ids.Enqueue(Instantiate(Resources.Load("Cube") as GameObject, new Vector3(-2.5f + 0.7f * i, -5 + height, 3), Quaternion.identity).GetInstanceID());
+                ids.Enqueue(Instantiate(Resources.Load("Cube") as GameObject, new Vector3(-3.5f, -5 + height, -2.5f + 0.7f * i), Quaternion.identity).GetInstanceID());
                 //some random shit
             }
             height += 0.7f;
@@ -36,7 +36,7 @@ public class Generator : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (GameObject.Find("TestPlayer").transform.position.y > height - 15 * 0.7f)
+        if (GameObject.Find("Ball").transform.position.y > height - 15 * 0.7f)
         {
             GenerateChunk();
             DestroyChunk();

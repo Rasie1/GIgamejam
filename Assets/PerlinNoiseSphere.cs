@@ -42,6 +42,7 @@ namespace Assets
         // Update is called once per frame
         void Update()
         {
+            transform.position = new Vector3(-1.83f, transform.position.y, transform.position.z);
             Mesh mesh = _sphere.GetComponent<MeshFilter>().mesh;
 
             if (_baseVertices == null)

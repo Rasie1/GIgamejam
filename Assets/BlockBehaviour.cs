@@ -8,7 +8,7 @@ public class BlockBehaviour : MonoBehaviour {
     private Vector3 activatedPosition;
 
     public float ActivationMoveSpeed = 10;
-    public float ActivationOffset = 1;
+    private float ActivationOffset = -2;
 
     public bool IsActivated {
         get
