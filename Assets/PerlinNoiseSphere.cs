@@ -36,7 +36,7 @@ namespace Assets
         // Use this for initialization
         void Start()
         {
-            _sphere = GameObject.Find("Ball");
+            _sphere = GameObject.Find("BallVisualMesh");
         }
 
         // Update is called once per frame

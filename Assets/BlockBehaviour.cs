@@ -37,20 +37,21 @@ public class BlockBehaviour : MonoBehaviour {
     }
 
     protected virtual void Activate() {
-        Debug.Log("Block activated");
-        //this.transform.Translate(2, 0, 0);
     }
 
     protected virtual void Deactivate()
     {
-        Debug.Log("Block deactivated");
-        //this.transform.Translate(-2, 0, 0);
     }
 
-	void Start () {
+    protected virtual void Init()
+    {
         IsActivated = false;
         deactivatedPosition = this.transform.position;
         activatedPosition.Set(ActivationOffset, this.transform.position.y, this.transform.position.z);
+    }
+
+	void Start () {
+        Init();
 	}
 
     protected void UpdateBlock()
