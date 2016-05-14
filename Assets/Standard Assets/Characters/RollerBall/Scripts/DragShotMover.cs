@@ -35,7 +35,15 @@ public class DragShotMover : MonoBehaviour {
         _sprite.transform.position = centerPos;
         Vector3 direction = _finalPosition - _initialPosition;
         direction = Vector3.Normalize(direction);
-		_sprite.transform.right = direction;
+        Vector3 newDirection = direction;
+        Vector3 camPosition;
+        camPosition.x = cam.transform.position.x;
+        camPosition.y = centerPos.y;
+        camPosition.z = centerPos.z;
+        newDirection.y = -direction.z;
+        newDirection.z = direction.y;
+		_sprite.transform.LookAt(camPosition,newDirection);
+        //Debug.Log(newDirection);
 		//_sprite.transform.localEulerAngles = new Vector3(0,90,_sprite.transform.localEulerAngles.z);
         //if (_mirrorZ) _sprite.transform.right *= -1f;
         Vector3 scale = new Vector3(1,1,1);
