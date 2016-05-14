@@ -28,6 +28,10 @@ namespace UnityStandardAssets.Vehicles.Ball
             ////originalScale = GetComponent<MeshRenderer>().transform.localScale;
         }
 
+        public void Die()
+        {
+            Debug.Log("YOU DIED");
+        }
         private void Update()
         {
             ballVisualMesh.transform.position = this.transform.position;
@@ -37,7 +41,8 @@ namespace UnityStandardAssets.Vehicles.Ball
             var scale = ballVisualMesh.transform.localScale;
             var mag = vel.magnitude;
             var width = System.Math.Min(5 / mag, 1);
-            ballVisualMesh.transform.localScale = new Vector3(width, mag / 10 + 1, width);
+            var hpCoeff = Ball.Health / 100f;
+            ballVisualMesh.transform.localScale = new Vector3(width * hpCoeff, (mag / 10 + 1) * hpCoeff, width * hpCoeff);
             ballVisualMesh.GetComponent<TrailRenderer>().startWidth = width;
 
             float offset = Convert.ToSingle(Time.time);

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityStandardAssets.Vehicles.Ball;
  
 [RequireComponent (typeof(Rigidbody))]
  
@@ -104,7 +105,9 @@ public class DragShotMover : MonoBehaviour {
 
 		Stretch(stretchLine,GetComponent<Rigidbody>().position,pos,true);
 	}
- 
+
+    public float JumpCost = 15;
+
 	void  OnMouseUp (){
 		mouseDragging = false;
 		stretchLine.GetComponent<Renderer>().enabled = false;
@@ -112,6 +115,13 @@ public class DragShotMover : MonoBehaviour {
 		if (overrideVelocity) {
 			// cancel existing velocity
 			GetComponent<Rigidbody>().AddForce(-GetComponent<Rigidbody>().velocity, ForceMode.VelocityChange);
+            Ball.Health -= JumpCost;
+            if (Ball.Health < 1)
+            {
+                Ball.Health = 1;
+                var ball = FindObjectOfType<Ball>();
+                ball.Die();
+            }
  
 		}
  

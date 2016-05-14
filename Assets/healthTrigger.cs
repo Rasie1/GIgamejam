@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEditor;
 using UnityStandardAssets.Vehicles.Ball;
 
-public class healthTrigger : MonoBehaviour {
+public class HealthTrigger : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
@@ -19,6 +19,7 @@ public class healthTrigger : MonoBehaviour {
     void OnTriggerEnter(Collider myTrigger)
     {
         AddHealth(healthPackValue);
+        Destroy(gameObject);
     }
 
     public static void AddHealth(float value)
@@ -26,5 +27,6 @@ public class healthTrigger : MonoBehaviour {
         Ball.Health += healthPackValue;
         if (Ball.Health > 100)
             Ball.Health = 100;
+        
     }
 }
