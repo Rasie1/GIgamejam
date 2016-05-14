@@ -6,7 +6,7 @@ using System.Text;
 
 public class TemporaryBlockBehaviour : BlockBehaviour
 {
-    private float DeactivateDelay = 2;
+    private float DeactivateDelay = 1;
     private float nextTime;
 
     protected override void Activate()
