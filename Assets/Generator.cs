@@ -15,11 +15,12 @@ public class Generator : MonoBehaviour {
     [SerializeField] public Material blueMat;
     [SerializeField] public Material yellowMat;
     [SerializeField] public Material redMat;
+    [SerializeField] public Material greyMat;
 
-    public int level;
-    public int biom;
-    public int numOfBioms;
-    public int[][] blockPrs;
+    private int level;
+    private int biom;
+    private int numOfBioms;
+    private int[][] blockPrs;
     //private Queue<int> ids;
 
 	// Use this for initialization
@@ -28,71 +29,33 @@ public class Generator : MonoBehaviour {
         level = 0;
 
         biom = 0;
-        blockPrs = new int[7][];
+        blockPrs = new int[8][];
         numOfBioms = 0;
 
         //D.N.O.
-        blockPrs[numOfBioms] = new int[5];
-        blockPrs[numOfBioms][0] = 0;
-        blockPrs[numOfBioms][1] = 0;
-        blockPrs[numOfBioms][2] = 100;
-        blockPrs[numOfBioms][3] = 0;
-        blockPrs[numOfBioms][4] = 0;
-        ++numOfBioms;
+        NewBiom(0,0,0,0,0,100,0,ref blockPrs,ref numOfBioms);
 
         //BIOM 1
-        blockPrs[numOfBioms] = new int[5];
-        blockPrs[numOfBioms][0] = 100;
-        blockPrs[numOfBioms][1] = 0;
-        blockPrs[numOfBioms][2] = 0;
-        blockPrs[numOfBioms][3] = 0;
-        blockPrs[numOfBioms][4] = 95;
-        ++numOfBioms;
+        NewBiom(95,100,0,0,0,0,0,ref blockPrs,ref numOfBioms);
 
         //BIOM 2
-        blockPrs[numOfBioms] = new int[5];
-        blockPrs[numOfBioms][0] = 75;
-        blockPrs[numOfBioms][1] = 0;
-        blockPrs[numOfBioms][2] = 100;
-        blockPrs[numOfBioms][3] = 0;
-        blockPrs[numOfBioms][4] = 90;
-        ++numOfBioms;
+        NewBiom(90,75,0,100,0,0,0,ref blockPrs,ref numOfBioms);
 
         //BIOM 3
-        blockPrs[numOfBioms] = new int[5];
-        blockPrs[numOfBioms][0] = 50;
-        blockPrs[numOfBioms][1] = 0;
-        blockPrs[numOfBioms][2] = 100;
-        blockPrs[numOfBioms][3] = 0;
-        blockPrs[numOfBioms][4] = 90;
-        ++numOfBioms;
+        NewBiom(90,50,0,100,0,0,0,ref blockPrs,ref numOfBioms);
 
         //BIOM 4
-        blockPrs[numOfBioms] = new int[5];
-        blockPrs[numOfBioms][0] = 25;
-        blockPrs[numOfBioms][1] = 0;
-        blockPrs[numOfBioms][2] = 75;
-        blockPrs[numOfBioms][3] = 100;
-        blockPrs[numOfBioms][4] = 90;
-        ++numOfBioms;
+        NewBiom(90,25,0,75,0,0,100,ref blockPrs,ref numOfBioms);
 
         //BIOM 5
-        blockPrs[numOfBioms] = new int[5];
-        blockPrs[numOfBioms][0] = 25;
-        blockPrs[numOfBioms][1] = 0;
-        blockPrs[numOfBioms][2] = 50;
-        blockPrs[numOfBioms][3] = 100;
-        blockPrs[numOfBioms][4] = 90;        
-        ++numOfBioms;
+        NewBiom(90,25,0,50,0,0,100,ref blockPrs,ref numOfBioms);
 
         //BIOM 6
-        blockPrs[numOfBioms] = new int[5];
-        blockPrs[numOfBioms][0] = 25;
-        blockPrs[numOfBioms][1] = 50;
-        blockPrs[numOfBioms][2] = 75;
-        blockPrs[numOfBioms][3] = 100;
-        blockPrs[numOfBioms][4] = 85;
-        ++numOfBioms;
+        NewBiom(85,25,50,75,0,0,100,ref blockPrs,ref numOfBioms);
+
+        //BIOM 7
+        NewBiom(85,20,40,60,80,0,100,ref blockPrs,ref numOfBioms);
+
 
         //    ids = new Queue<int>();
         blocks = new List<List<GameObject>>(24);
@@ -172,20 +135,31 @@ public class Generator : MonoBehaviour {
                     };
 
                     //Coloring
-                    if(r > (float)blockPrs[biom][4]/100){
-                        if(rColor < (float)blockPrs[biom][0]/100){
+                    if(r > (float)blockPrs[biom][0]/100){
+                        if(rColor < (float)blockPrs[biom][1]/100){
                             (obj as GameObject).GetComponent<Renderer>().material = greenMat;
                             (obj as GameObject).AddComponent<TemporaryBlockBehaviour>();
                         }
-                        else if(rColor < (float)blockPrs[biom][1]/100){
+                        else if(rColor < (float)blockPrs[biom][2]/100){
                             (obj as GameObject).GetComponent<Renderer>().material = blueMat;
                             (obj as GameObject).AddComponent<BlockBehaviour>();
                         }
-                        else if(rColor < (float)blockPrs[biom][2]/100){
+                        else if (rColor < (float)blockPrs[biom][3] / 100)
+                        {
                             (obj as GameObject).GetComponent<Renderer>().material = redMat;
                             (obj as GameObject).AddComponent<ActivatedBlockBehaviour>();
                         }
-                        else{
+                        else if (rColor < (float)blockPrs[biom][4] / 100)
+                        {
+                            (obj as GameObject).GetComponent<Renderer>().material = greyMat;
+                            (obj as GameObject).AddComponent<DisabledBlockBehaviour>();
+                        }
+                        else if (rColor < (float)blockPrs[biom][5] / 100)
+                        {
+                            (obj as GameObject).GetComponent<Renderer>().material = greyMat;
+                            (obj as GameObject).AddComponent<DisabledActivatedBlockBehaviour>();
+                        }
+                        else {
                             (obj as GameObject).GetComponent<Renderer>().material = yellowMat;
                             (obj as GameObject).AddComponent<BlockBehaviour>();
                         }
@@ -244,9 +218,15 @@ public class Generator : MonoBehaviour {
 
     }
 
-    //void NewBiom(int index, int green, int red, int blue, int yellow, int overall){
-    //    probabilities = new int[5];
-
-    //    return probabilities;
-    //} 
+    void NewBiom(int overall, int green, int red, int blue, int yellow, int gray1, int gray2, ref int[][] blockPrs, ref int numOfBioms){
+        blockPrs[numOfBioms] = new int[7];
+        blockPrs[numOfBioms][0] = overall;
+        blockPrs[numOfBioms][1] = green;
+        blockPrs[numOfBioms][2] = red;
+        blockPrs[numOfBioms][3] = blue;
+        blockPrs[numOfBioms][4] = yellow;
+        blockPrs[numOfBioms][5] = gray1;
+        blockPrs[numOfBioms][6] = gray2;
+        ++numOfBioms;
+    } 
 }
