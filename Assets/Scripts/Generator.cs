@@ -26,9 +26,7 @@ public class Generator : MonoBehaviour {
         }
 
 
-        Object rwall = Instantiate(Resources.Load("Cube") as GameObject, new Vector3(-3.5f, -5 + 0.7f*24, -2.5f + 0.7f * 7), Quaternion.identity);
-        (rwall as GameObject).transform.localScale = new Vector3(1.7f, 1.4f, 1.4f);
-        (rwall as GameObject).transform.position += new Vector3(0, 0.35f, 0.35f);
+        
 
     }
 
@@ -43,10 +41,15 @@ public class Generator : MonoBehaviour {
                 float r = Random.value;
                 if (!blocks[j][i].Key)
                 {
-                    Object obj = Instantiate(Resources.Load("Cube") as GameObject, new Vector3(-3.5f, -5 + height, -2.5f + 0.7f * i), Quaternion.identity);
+                    Object obj = new Object();
+                    if (r > 0.97)
+                        obj = Instantiate(Resources.Load("ActivatedBlock") as GameObject, new Vector3(-3.5f, -5 + height, -2.5f + 0.7f * i), Quaternion.identity);
+                    else
+                        obj = Instantiate(Resources.Load("Block") as GameObject, new Vector3(-3.5f, -5 + height, -2.5f + 0.7f * i), Quaternion.identity);
                     id = obj.GetInstanceID();
                     blocks[j][i] = new KeyValuePair<bool, int>(true, id);
                     //Debug.Log(blocks[20][i].ToString() + " " + blocks[21][i].ToString() + " " + blocks[22][i].ToString() + " " + blocks[23][i].ToString() + "\n DEBUG");
+                    r = Random.value;
                     if (r > 0.75 && r <= 0.85 && i != 7 && !blocks[j][i + 1].Key)
                     {
                         blocks[j][i + 1] = new KeyValuePair<bool, int>(true, id);
