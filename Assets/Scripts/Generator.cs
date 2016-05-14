@@ -81,6 +81,7 @@ public class Generator : MonoBehaviour {
                         }
                         else{
                             (obj as GameObject).GetComponent<Renderer>().material = yellowMat;
+                            (obj as GameObject).AddComponent<TemporaryBlockBehaviour>();
                             (obj as GameObject).AddComponent<BlockBehaviour>();
                         }
 
