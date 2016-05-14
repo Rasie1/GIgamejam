@@ -73,7 +73,7 @@ public class BlockBehaviour : MonoBehaviour {
         UpdateBlock();
 	}   
 
-    void OnMouseDown() {
+    protected virtual void OnMouseDown() {
         IsActivated = !IsActivated;
     }
 }

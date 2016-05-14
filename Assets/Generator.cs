@@ -15,6 +15,7 @@ public class Generator : MonoBehaviour {
     [SerializeField] public Material blueMat;
     [SerializeField] public Material yellowMat;
     [SerializeField] public Material redMat;
+    [SerializeField] public Material greyMat;
 
     public int level;
     public int biom;
@@ -28,71 +29,86 @@ public class Generator : MonoBehaviour {
         level = 0;
 
         biom = 0;
-        blockPrs = new int[7][];
+        blockPrs = new int[9][];
         numOfBioms = 0;
 
         //D.N.O.
-        blockPrs[numOfBioms] = new int[5];
+        blockPrs[numOfBioms] = new int[7];
         blockPrs[numOfBioms][0] = 0;
         blockPrs[numOfBioms][1] = 0;
-        blockPrs[numOfBioms][2] = 100;
+        blockPrs[numOfBioms][2] = 0;
         blockPrs[numOfBioms][3] = 0;
         blockPrs[numOfBioms][4] = 0;
+        blockPrs[numOfBioms][5] = 0;
+        blockPrs[numOfBioms][6] = 100;
         ++numOfBioms;
 
         //BIOM 1
-        blockPrs[numOfBioms] = new int[5];
+        blockPrs[numOfBioms] = new int[7];
         blockPrs[numOfBioms][0] = 100;
         blockPrs[numOfBioms][1] = 0;
         blockPrs[numOfBioms][2] = 0;
         blockPrs[numOfBioms][3] = 0;
         blockPrs[numOfBioms][4] = 95;
+        blockPrs[numOfBioms][5] = 0;
+        blockPrs[numOfBioms][6] = 0;
         ++numOfBioms;
 
         //BIOM 2
-        blockPrs[numOfBioms] = new int[5];
+        blockPrs[numOfBioms] = new int[7];
         blockPrs[numOfBioms][0] = 75;
         blockPrs[numOfBioms][1] = 0;
         blockPrs[numOfBioms][2] = 100;
         blockPrs[numOfBioms][3] = 0;
         blockPrs[numOfBioms][4] = 90;
+        blockPrs[numOfBioms][5] = 0;
+        blockPrs[numOfBioms][6] = 0;
         ++numOfBioms;
 
         //BIOM 3
-        blockPrs[numOfBioms] = new int[5];
+        blockPrs[numOfBioms] = new int[7];
         blockPrs[numOfBioms][0] = 50;
         blockPrs[numOfBioms][1] = 0;
         blockPrs[numOfBioms][2] = 100;
         blockPrs[numOfBioms][3] = 0;
         blockPrs[numOfBioms][4] = 90;
+        blockPrs[numOfBioms][5] = 0;
+        blockPrs[numOfBioms][6] = 0;
         ++numOfBioms;
 
         //BIOM 4
-        blockPrs[numOfBioms] = new int[5];
+        blockPrs[numOfBioms] = new int[7];
         blockPrs[numOfBioms][0] = 25;
         blockPrs[numOfBioms][1] = 0;
         blockPrs[numOfBioms][2] = 75;
         blockPrs[numOfBioms][3] = 100;
         blockPrs[numOfBioms][4] = 90;
+        blockPrs[numOfBioms][5] = 0;
+        blockPrs[numOfBioms][6] = 0;
         ++numOfBioms;
 
         //BIOM 5
-        blockPrs[numOfBioms] = new int[5];
+        blockPrs[numOfBioms] = new int[7];
         blockPrs[numOfBioms][0] = 25;
         blockPrs[numOfBioms][1] = 0;
         blockPrs[numOfBioms][2] = 50;
         blockPrs[numOfBioms][3] = 100;
-        blockPrs[numOfBioms][4] = 90;        
+        blockPrs[numOfBioms][4] = 90;
+        blockPrs[numOfBioms][5] = 0;
+        blockPrs[numOfBioms][6] = 0;
         ++numOfBioms;
 
         //BIOM 6
-        blockPrs[numOfBioms] = new int[5];
+        blockPrs[numOfBioms] = new int[7];
         blockPrs[numOfBioms][0] = 25;
         blockPrs[numOfBioms][1] = 50;
         blockPrs[numOfBioms][2] = 75;
         blockPrs[numOfBioms][3] = 100;
         blockPrs[numOfBioms][4] = 85;
+        blockPrs[numOfBioms][5] = 0;
+        blockPrs[numOfBioms][6] = 0;
         ++numOfBioms;
+
 
         //    ids = new Queue<int>();
         blocks = new List<List<GameObject>>(24);
@@ -179,11 +195,22 @@ public class Generator : MonoBehaviour {
                             (obj as GameObject).GetComponent<Renderer>().material = blueMat;
                             (obj as GameObject).AddComponent<BlockBehaviour>();
                         }
-                        else if(rColor < (float)blockPrs[biom][2]/100){
+                        else if (rColor < (float)blockPrs[biom][2] / 100)
+                        {
                             (obj as GameObject).GetComponent<Renderer>().material = redMat;
                             (obj as GameObject).AddComponent<ActivatedBlockBehaviour>();
                         }
-                        else{
+                        else if (rColor < (float)blockPrs[biom][5] / 100)
+                        {
+                            (obj as GameObject).GetComponent<Renderer>().material = greyMat;
+                            (obj as GameObject).AddComponent<DisabledBlockBehaviour>();
+                        }
+                        else if (rColor < (float)blockPrs[biom][6] / 100)
+                        {
+                            (obj as GameObject).GetComponent<Renderer>().material = greyMat;
+                            (obj as GameObject).AddComponent<DisabledActivatedBlockBehaviour>();
+                        }
+                        else {
                             (obj as GameObject).GetComponent<Renderer>().material = yellowMat;
                             (obj as GameObject).AddComponent<BlockBehaviour>();
                         }
