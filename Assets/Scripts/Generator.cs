@@ -9,6 +9,10 @@ public class Generator : MonoBehaviour {
 
     [SerializeField] public GameObject wallLeft;
     [SerializeField] public GameObject wallRight;
+    [SerializeField] public Material greenMat;
+    [SerializeField] public Material blueMat;
+    [SerializeField] public Material yellowMat;
+    [SerializeField] public Material redMat;
     //private Queue<int> ids;
 
 	// Use this for initialization
@@ -26,7 +30,7 @@ public class Generator : MonoBehaviour {
         }
     }
 	
-    void GenerateChunk()
+    void GenerateChunk() 
     {
         for (int j = 20; j < 24; ++j) 
         {
@@ -35,6 +39,7 @@ public class Generator : MonoBehaviour {
                 //Debug.Log(Instantiate(Resources.Load("Cube") as GameObject, new Vector3(-3.5f, -5 + height, -2.5f + 0.7f * i), Quaternion.identity).GetInstanceID());
                 int id = 0;
                 float r = Random.value;
+                float rColor = Random.value;
                 if (!blocks[j][i].Key)
                 {
                     Object obj = Instantiate(Resources.Load("Cube") as GameObject, new Vector3(-3.5f, -5 + height, -2.5f + 0.7f * i), Quaternion.identity);
@@ -60,6 +65,21 @@ public class Generator : MonoBehaviour {
                         blocks[j][i + 1] = new KeyValuePair<bool, int>(true, id);
                         (obj as GameObject).transform.localScale = new Vector3(1.7f, 1.4f, 1.4f);
                         (obj as GameObject).transform.position += new Vector3(0, 0.35f, 0.35f);
+                    }
+                    if(r > 0.9){
+                        if(rColor < 0.25){
+                            (obj as GameObject).GetComponent<Renderer>().material = greenMat;
+                        }
+                        else if(rColor < 0.5){
+                            (obj as GameObject).GetComponent<Renderer>().material = blueMat;
+                        }
+                        else if(rColor < 0.75){
+                            (obj as GameObject).GetComponent<Renderer>().material = redMat;
+                        }
+                        else{
+                            (obj as GameObject).GetComponent<Renderer>().material = yellowMat;
+                        }
+
                     }
                 }
             }

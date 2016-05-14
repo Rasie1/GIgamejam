@@ -59,7 +59,6 @@ public class DragShotMover : MonoBehaviour {
  
 	void  OnMouseDown (){
 		mouseDragging = true;
-		stretchLine.GetComponent<Renderer>().enabled = true;
 
 		if (pauseOnDrag) {
 			// pause the simulation
@@ -103,6 +102,7 @@ public class DragShotMover : MonoBehaviour {
 		forceVector *= dragDistance * magMultiplier;
 
 		Stretch(stretchLine,GetComponent<Rigidbody>().position,pos,true);
+        stretchLine.GetComponent<Renderer>().enabled = true;
 	}
  
 	void  OnMouseUp (){
