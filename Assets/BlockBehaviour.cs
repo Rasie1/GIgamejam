@@ -72,6 +72,6 @@ public class BlockBehaviour : MonoBehaviour {
 	}   
 
     void OnMouseDown() {
-        IsActivated = true;
+        IsActivated = !IsActivated;
     }
 }
