@@ -58,7 +58,6 @@ namespace UnityStandardAssets.Vehicles.Ball
             source.Play();
         }
 
-
         private void animateBounce(float sqrMagnitude)
         {
             Vector3 newScale = originalScale;
