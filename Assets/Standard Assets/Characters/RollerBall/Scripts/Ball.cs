@@ -66,7 +66,7 @@ namespace UnityStandardAssets.Vehicles.Ball
                 r = UnityEngine.Mathf.Round(UnityEngine.Random.value) + 1;
                 source[(int)r].Play();
             }
-            Debug.Log(collision.relativeVelocity.magnitude);
+            //Debug.Log(collision.relativeVelocity.magnitude);
         }
 
         private void animateBounce(float sqrMagnitude)
