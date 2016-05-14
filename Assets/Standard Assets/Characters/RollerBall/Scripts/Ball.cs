@@ -45,7 +45,7 @@ namespace UnityStandardAssets.Vehicles.Ball
             var hpCoeff = Ball.Health / 100f;
             ballVisualMesh.transform.localScale = new Vector3(width * hpCoeff, (mag / 10 + 1) * hpCoeff, width * hpCoeff);
             width = System.Math.Max(width, 0.5f);
-            GameObject.Find("Ball").GetComponent<SphereCollider>().radius = width * hpCoeff;
+            GameObject.Find("Ball").GetComponent<SphereCollider>().radius = width * hpCoeff * 0.5f;
             ballVisualMesh.GetComponent<TrailRenderer>().startWidth = width;
 
             float offset = Convert.ToSingle(Time.time);
