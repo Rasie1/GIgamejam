@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEditor;
+//using UnityEditor;
 using UnityStandardAssets.Vehicles.Ball;
 
 public class HealthTrigger : MonoBehaviour {
