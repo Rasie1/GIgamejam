@@ -75,10 +75,11 @@ public class Generator : MonoBehaviour {
                     if(r > 0.9){
                         if(rColor < 0.25){
                             (obj as GameObject).GetComponent<Renderer>().material = greenMat;
-                            //(obj as GameObject).AddComponent<TemporaryBlockBehaviour>();
+                            (obj as GameObject).AddComponent<TemporaryBlockBehaviour>();
                         }
                         else if(rColor < 0.5){
                             (obj as GameObject).GetComponent<Renderer>().material = blueMat;
+                            (obj as GameObject).AddComponent<BlockBehaviour>();
                         }
                         else if(rColor < 0.75){
                             (obj as GameObject).GetComponent<Renderer>().material = redMat;
@@ -86,8 +87,12 @@ public class Generator : MonoBehaviour {
                         }
                         else{
                             (obj as GameObject).GetComponent<Renderer>().material = yellowMat;
+                            (obj as GameObject).AddComponent<BlockBehaviour>();
                         }
 
+                    }
+                    else{
+                        (obj as GameObject).AddComponent<BlockBehaviour>();
                     }
                 }
             }

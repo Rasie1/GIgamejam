@@ -37,10 +37,12 @@ public class BlockBehaviour : MonoBehaviour {
     }
 
     protected virtual void Activate() {
+        Debug.Log("Activated");
     }
 
     protected virtual void Deactivate()
     {
+        Debug.Log("Deactivated");
     }
 
     protected virtual void Init()
