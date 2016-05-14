@@ -29,6 +29,7 @@ public class DragShotMover : MonoBehaviour {
 	private Ray mouseRay;
 
 	void Stretch(GameObject _sprite,Vector3 _initialPosition, Vector3 _finalPosition, bool _mirrorZ) {
+        _initialPosition.y += 0.5f;
 		_initialPosition.x = _sprite.transform.position.x;
 		_finalPosition.x = _sprite.transform.position.x;
 		Vector3 centerPos = (_initialPosition + _finalPosition) / 2f;
@@ -42,7 +43,7 @@ public class DragShotMover : MonoBehaviour {
 		camPosition.z = centerPos.z;
 		newDirection.y = -direction.z;
 		newDirection.z = direction.y;
-		_sprite.transform.LookAt(camPosition,newDirection);
+		_sprite.transform.LookAt(camPosition, newDirection);
 		//Debug.Log(newDirection);
 		//_sprite.transform.localEulerAngles = new Vector3(0,90,_sprite.transform.localEulerAngles.z);
 		//if (_mirrorZ) _sprite.transform.right *= -1f;
