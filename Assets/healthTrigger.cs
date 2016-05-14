@@ -16,7 +16,7 @@ public class HealthTrigger : MonoBehaviour {
     
     }
 
-    [SerializeField] private static float healthPackValue = 15f;
+    [SerializeField] private static float healthPackValue = 25f;
     void OnTriggerEnter(Collider myTrigger)
     {
         AddHealth(healthPackValue);
