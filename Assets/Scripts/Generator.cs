@@ -78,7 +78,7 @@ public class Generator : MonoBehaviour {
         for (int i = 0; i < 4; ++i)
             for (int j = 0; j < 8; ++j)
             {
-                Destroy(UnityEditor.EditorUtility.InstanceIDToObject(blocks[i][j].Value));
+                //Destroy(UnityEditor.EditorUtility.InstanceIDToObject(blocks[i][j].Value));
             }
     }
 

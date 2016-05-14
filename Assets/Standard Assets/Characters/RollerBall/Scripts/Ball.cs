@@ -37,6 +37,7 @@ namespace UnityStandardAssets.Vehicles.Ball
             var scale = ballVisualMesh.transform.localScale;
             var mag = vel.magnitude;
             var width = System.Math.Min(5 / mag, 1);
+            width = System.Math.Max(width, 0.5f);
             ballVisualMesh.transform.localScale = new Vector3(width, mag / 10 + 1, width);
             ballVisualMesh.GetComponent<TrailRenderer>().startWidth = width;
 
