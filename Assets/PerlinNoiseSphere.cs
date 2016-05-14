@@ -36,7 +36,7 @@ namespace Assets
         // Use this for initialization
         void Start()
         {
-            _sphere = GameObject.Find("sphere");
+            _sphere = GameObject.Find("Ball");
         }
 
         // Update is called once per frame
