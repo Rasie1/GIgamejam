@@ -28,60 +28,70 @@ public class Generator : MonoBehaviour {
         level = 0;
 
         biom = 0;
-        blockPrs = new int[6][];
+        blockPrs = new int[7][];
+        numOfBioms = 0;
 
-        //BIOM 0
-        blockPrs[0] = new int[5];
-        blockPrs[0][0] = 100;
-        blockPrs[0][1] = 0;
-        blockPrs[0][2] = 0;
-        blockPrs[0][3] = 0;
-        blockPrs[0][4] = 95;
+        //D.N.O.
+        blockPrs[numOfBioms] = new int[5];
+        blockPrs[numOfBioms][0] = 0;
+        blockPrs[numOfBioms][1] = 0;
+        blockPrs[numOfBioms][2] = 100;
+        blockPrs[numOfBioms][3] = 0;
+        blockPrs[numOfBioms][4] = 0;
         ++numOfBioms;
 
         //BIOM 1
-        blockPrs[1] = new int[5];
-        blockPrs[1][0] = 75;
-        blockPrs[1][1] = 0;
-        blockPrs[1][2] = 100;
-        blockPrs[1][3] = 0;
-        blockPrs[1][4] = 90;
+        blockPrs[numOfBioms] = new int[5];
+        blockPrs[numOfBioms][0] = 100;
+        blockPrs[numOfBioms][1] = 0;
+        blockPrs[numOfBioms][2] = 0;
+        blockPrs[numOfBioms][3] = 0;
+        blockPrs[numOfBioms][4] = 95;
         ++numOfBioms;
 
         //BIOM 2
-        blockPrs[2] = new int[5];
-        blockPrs[2][0] = 50;
-        blockPrs[2][1] = 0;
-        blockPrs[2][2] = 100;
-        blockPrs[2][3] = 0;
-        blockPrs[2][4] = 90;
+        blockPrs[numOfBioms] = new int[5];
+        blockPrs[numOfBioms][0] = 75;
+        blockPrs[numOfBioms][1] = 0;
+        blockPrs[numOfBioms][2] = 100;
+        blockPrs[numOfBioms][3] = 0;
+        blockPrs[numOfBioms][4] = 90;
         ++numOfBioms;
 
         //BIOM 3
-        blockPrs[3] = new int[5];
-        blockPrs[3][0] = 25;
-        blockPrs[3][1] = 0;
-        blockPrs[3][2] = 75;
-        blockPrs[3][3] = 100;
-        blockPrs[3][4] = 90;
+        blockPrs[numOfBioms] = new int[5];
+        blockPrs[numOfBioms][0] = 50;
+        blockPrs[numOfBioms][1] = 0;
+        blockPrs[numOfBioms][2] = 100;
+        blockPrs[numOfBioms][3] = 0;
+        blockPrs[numOfBioms][4] = 90;
         ++numOfBioms;
 
         //BIOM 4
-        blockPrs[4] = new int[5];
-        blockPrs[4][0] = 25;
-        blockPrs[4][1] = 0;
-        blockPrs[4][2] = 50;
-        blockPrs[4][3] = 100;
-        blockPrs[4][4] = 90;
+        blockPrs[numOfBioms] = new int[5];
+        blockPrs[numOfBioms][0] = 25;
+        blockPrs[numOfBioms][1] = 0;
+        blockPrs[numOfBioms][2] = 75;
+        blockPrs[numOfBioms][3] = 100;
+        blockPrs[numOfBioms][4] = 90;
         ++numOfBioms;
 
         //BIOM 5
-        blockPrs[5] = new int[5];
-        blockPrs[5][0] = 25;
-        blockPrs[5][1] = 50;
-        blockPrs[5][2] = 75;
-        blockPrs[5][3] = 100;
-        blockPrs[5][4] = 85;
+        blockPrs[numOfBioms] = new int[5];
+        blockPrs[numOfBioms][0] = 25;
+        blockPrs[numOfBioms][1] = 0;
+        blockPrs[numOfBioms][2] = 50;
+        blockPrs[numOfBioms][3] = 100;
+        blockPrs[numOfBioms][4] = 90;        
+        ++numOfBioms;
+
+        //BIOM 6
+        blockPrs[numOfBioms] = new int[5];
+        blockPrs[numOfBioms][0] = 25;
+        blockPrs[numOfBioms][1] = 50;
+        blockPrs[numOfBioms][2] = 75;
+        blockPrs[numOfBioms][3] = 100;
+        blockPrs[numOfBioms][4] = 85;
         ++numOfBioms;
 
         //    ids = new Queue<int>();
@@ -98,12 +108,18 @@ public class Generator : MonoBehaviour {
 
     void GenerateChunk()
     {
-        ++level;
-        if(level>=10){
-            if(numOfBioms > biom+1)
-                biom++;
-            level = 0;
-        };
+        if(level == 1 && biom == 0){ 
+            ++level;
+            ++biom;
+        }
+        else{
+            ++level;
+            if(level>=10){
+                if(numOfBioms > biom+1)
+                    biom++;
+                level = 0;
+            }
+        }
         Debug.Log("Current level: "+level+", Biom: "+biom);
         for (int j = 20; j < 24; ++j) 
         {

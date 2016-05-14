@@ -13,6 +13,8 @@ namespace UnityStandardAssets.Vehicles.Ball
         private Collider collider;
         private GameObject ballVisualMesh;
         private AudioSource[] source;
+        private int score;
+
         float r;
 
         public static float Health = 100f;
@@ -21,6 +23,7 @@ namespace UnityStandardAssets.Vehicles.Ball
 
         private void Start()
         {
+            score = 0;
             GetComponent<Rigidbody>().maxAngularVelocity = m_MaxAngularVelocity;
             //collider = gameObject.AddComponent<SphereCollider>();
             
@@ -81,6 +84,12 @@ namespace UnityStandardAssets.Vehicles.Ball
 
             //            scaleParent.transform.localScale = originalScale;
             //        Ani.Mate.From(scaleParent.transform, 1, {"localScale": newScale, "easing": Ani.Easing.Elastic, "direction": Ani.Easing.Out});
+        }
+        void  OnGUI (){
+            if(score < (int)ballVisualMesh.transform.position.y)
+                score = (int)ballVisualMesh.transform.position.y;
+
+            GUI.Box ( new Rect(10, 10, 100, 20), "Score: "+score);
         }
     }
 }
