@@ -46,7 +46,7 @@ public class Generator : MonoBehaviour {
                     var shouldSpawnHealthpack = Random.value > 0.9;
                     if (shouldSpawnHealthpack)
                     {
-                        Object pickup = Instantiate(Resources.Load("HealthPack") as GameObject, new Vector3(-1.5f, -5 + height, -2.5f + 0.7f * i), Quaternion.identity);
+                        Object pickup = Instantiate(Resources.Load("HealthPack") as GameObject, new Vector3(-1.7f, -5 + height, -2.5f + 0.7f * i), Quaternion.identity);
                     }
                     Object obj = Instantiate(Resources.Load("Cube") as GameObject, new Vector3(-3.5f, -5 + height, -2.5f + 0.7f * i), Quaternion.identity);
                     id = obj.GetInstanceID();
@@ -87,7 +87,6 @@ public class Generator : MonoBehaviour {
                         }
                         else{
                             (obj as GameObject).GetComponent<Renderer>().material = yellowMat;
-                            (obj as GameObject).AddComponent<TemporaryBlockBehaviour>();
                             (obj as GameObject).AddComponent<BlockBehaviour>();
                         }
 
@@ -106,7 +105,8 @@ public class Generator : MonoBehaviour {
         for (int i = 0; i < 4; ++i)
             for (int j = 0; j < 8; ++j)
             {
-                //Destroy(UnityEditor.EditorUtility.InstanceIDToObject(blocks[i][j].Value));
+                
+                Destroy(UnityEditor.EditorUtility.InstanceIDToObject(blocks[i][j].Value));
             }
     }
 
