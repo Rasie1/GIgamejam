@@ -15,11 +15,7 @@ public class BallCamera : MonoBehaviour {
 	void Update () {
 		newPos.x = transform.position.x;
 		newPos.y = m_Rigidbody.position.y;
-		newPos.z = m_Rigidbody.position.z;
-		transform.position = newPos;
-
-		//Debug.Log(m_Rigidbody.position);
-		//Debug.Log(transform.position);
-
+		newPos.z = 0;
+		transform.position = newPos; 
 	}
 }

@@ -37,14 +37,10 @@ public class BlockBehaviour : MonoBehaviour {
     }
 
     protected virtual void Activate() {
-        Debug.Log("Block activated");
-        //this.transform.Translate(2, 0, 0);
     }
 
     protected virtual void Deactivate()
     {
-        Debug.Log("Block deactivated");
-        //this.transform.Translate(-2, 0, 0);
     }
 
     protected virtual void Init()
