@@ -11,6 +11,8 @@ namespace UnityStandardAssets.Vehicles.Ball
         private Vector3 originalScale;
         private Collider collider;
         private GameObject ballVisualMesh;
+
+        public static float Health = 100f;
         
         
 
@@ -45,14 +47,7 @@ namespace UnityStandardAssets.Vehicles.Ball
 
         void OnCollisionEnter(Collision collision)
         {
-            //float sqrMagnitude = collision.relativeVelocity.sqrMagnitude;
-            //ContactPoint contact = collision.contacts[0];
-            //Quaternion normalRotation = Quaternion.FromToRotation(Vector3.up, contact.normal);
 
-            //ballVisualMesh.transform.rotation = Quaternion.Inverse(normalRotation);
-            //animateBounce(GetComponent<Rigidbody>().velocity);
-
-            //ballVisualMesh.transform.localscale = originalscale;
         }
 
 

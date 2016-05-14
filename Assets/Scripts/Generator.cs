@@ -21,8 +21,14 @@ public class Generator : MonoBehaviour {
             UpdateInfo();
             GenerateChunk();
         }
+
+
+        Object rwall = Instantiate(Resources.Load("Cube") as GameObject, new Vector3(-3.5f, -5 + 0.7f*24, -2.5f + 0.7f * 7), Quaternion.identity);
+        (rwall as GameObject).transform.localScale = new Vector3(1.7f, 1.4f, 1.4f);
+        (rwall as GameObject).transform.position += new Vector3(0, 0.35f, 0.35f);
+
     }
-	
+
     void GenerateChunk()
     {
         for (int j = 20; j < 24; ++j) 
