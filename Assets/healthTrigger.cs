@@ -3,7 +3,7 @@ using System.Collections;
 //using UnityEditor;
 using UnityStandardAssets.Vehicles.Ball;
 
-public class HealthTrigger : MonoBehaviour {
+public class healthTrigger : MonoBehaviour {
     public AudioSource[] source; 
 
     // Use this for initialization
