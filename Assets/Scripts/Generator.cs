@@ -6,6 +6,9 @@ public class Generator : MonoBehaviour {
     
     private float height = 0;
     private List<List<KeyValuePair<bool, int>>> blocks;
+
+    [SerializeField] public GameObject wallLeft;
+    [SerializeField] public GameObject wallRight;
     //private Queue<int> ids;
 
 	// Use this for initialization
@@ -96,6 +99,16 @@ public class Generator : MonoBehaviour {
             DestroyChunk();
             UpdateInfo();
             GenerateChunk();
-        }
+        };
+        Vector3 wallLeftPos = wallLeft.transform.position;
+        wallLeftPos.y = GameObject.Find("Ball").transform.position.y;
+        wallLeftPos.x = GameObject.Find("Ball").transform.position.x;
+        Vector3 wallRightPos = wallRight.transform.position;
+        wallRightPos.y = GameObject.Find("Ball").transform.position.y;
+        wallRightPos.x = GameObject.Find("Ball").transform.position.x;
+
+        wallLeft.transform.position = wallLeftPos;
+        wallRight.transform.position = wallRightPos;
+
     }
 }
