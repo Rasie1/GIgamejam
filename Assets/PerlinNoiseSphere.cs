@@ -2,71 +2,79 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class PerlineNoiseSphere : MonoBehaviour
+namespace Assets
 {
-    [SerializeField]
-    private float _scaleField = 0.25f;
-    [SerializeField]
-    private float _speedField = 1;
-    [SerializeField]
-    private bool _recalculateNormalsField = true;
 
-    // Other code.
-
-    public void ScaleInput()
+    public class PerlinNoiseSphere : MonoBehaviour
     {
-        float scaleInput = _scaleField;
-    }
+        [SerializeField] private float _scaleField = 0.25f;
+        [SerializeField] private float _speedField = 1;
+        [SerializeField] private bool _recalculateNormalsField = true;
 
-    public void SpeedInput()
-    {
-        float speedInput = _speedField;
-    }
+        // Other code.
 
-    public void RecalcNormalsInput()
-    {
-        bool recalculateNormalsInput = _recalculateNormalsField;
-    }
-
-
-    private GameObject _sphere;
-    private Vector3[] _baseVertices;
-    private Perlin noise = new Perlin();
-
-    // Use this for initialization
-    void Start()
-    {
-        _sphere = GameObject.Find("sphere");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        Mesh mesh = _sphere.GetComponent<MeshFilter>().mesh;
-
-        if (_baseVertices == null)
-            _baseVertices = mesh.vertices;
-
-        var vertices = new Vector3[_baseVertices.Length];
-
-        var timex = Time.time * _speedField + 0.1365143;
-        var timey = Time.time * _speedField + 1.21688;
-        var timez = Time.time * _speedField + 2.5564;
-        for (var i = 0; i < vertices.Length; i++)
+        public void ScaleInput()
         {
-            var vertex = _baseVertices[i];
-
-            vertex.x += noise.Noise((float)(timex + vertex.x), (float)(timex + vertex.y), (float)(timex + vertex.z)) * _scaleField;
-            vertex.y += noise.Noise((float)(timey + vertex.x), (float)(timey + vertex.y), (float)(timey + vertex.z)) * _scaleField;
-            vertex.z += noise.Noise((float)(timez + vertex.x), (float)(timez + vertex.y), (float)(timez + vertex.z)) * _scaleField;
-
-            vertices[i] = vertex;
+            float scaleInput = _scaleField;
         }
 
-        mesh.vertices = vertices;
+        public void SpeedInput()
+        {
+            float speedInput = _speedField;
+        }
 
-        if (_recalculateNormalsField)
-            mesh.RecalculateNormals();
-        mesh.RecalculateBounds();
+        public void RecalcNormalsInput()
+        {
+            bool recalculateNormalsInput = _recalculateNormalsField;
+        }
+
+
+        private GameObject _sphere;
+        private Vector3[] _baseVertices;
+        private Perlin noise = new Perlin();
+
+        // Use this for initialization
+        void Start()
+        {
+            _sphere = GameObject.Find("sphere");
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            Mesh mesh = _sphere.GetComponent<MeshFilter>().mesh;
+
+            if (_baseVertices == null)
+                _baseVertices = mesh.vertices;
+
+            var vertices = new Vector3[_baseVertices.Length];
+
+            var timex = Time.time*_speedField + 0.1365143;
+            var timey = Time.time*_speedField + 1.21688;
+            var timez = Time.time*_speedField + 2.5564;
+            for (var i = 0; i < vertices.Length; i++)
+            {
+                var vertex = _baseVertices[i];
+
+                vertex.x +=
+                    noise.Noise((float) (timex + vertex.x), (float) (timex + vertex.y), (float) (timex + vertex.z))*
+                    _scaleField;
+                vertex.y +=
+                    noise.Noise((float) (timey + vertex.x), (float) (timey + vertex.y), (float) (timey + vertex.z))*
+                    _scaleField;
+                vertex.z +=
+                    noise.Noise((float) (timez + vertex.x), (float) (timez + vertex.y), (float) (timez + vertex.z))*
+                    _scaleField;
+
+                vertices[i] = vertex;
+            }
+
+            mesh.vertices = vertices;
+
+            if (_recalculateNormalsField)
+                mesh.RecalculateNormals();
+            mesh.RecalculateBounds();
+        }
     }
+
 }
