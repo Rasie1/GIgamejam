@@ -36,12 +36,18 @@ public class Generator : MonoBehaviour {
         {
             for (int i = 0; i < 8; ++i)
             {
+                
                 //Debug.Log(Instantiate(Resources.Load("Cube") as GameObject, new Vector3(-3.5f, -5 + height, -2.5f + 0.7f * i), Quaternion.identity).GetInstanceID());
                 int id = 0;
                 float r = Random.value;
                 float rColor = Random.value;
                 if (!blocks[j][i].Key)
                 {
+                    var shouldSpawnHealthpack = Random.value > 0.9;
+                    if (shouldSpawnHealthpack)
+                    {
+                        Object pickup = Instantiate(Resources.Load("HealthPack") as GameObject, new Vector3(-1.5f, -5 + height, -2.5f + 0.7f * i), Quaternion.identity);
+                    }
                     Object obj = Instantiate(Resources.Load("Cube") as GameObject, new Vector3(-3.5f, -5 + height, -2.5f + 0.7f * i), Quaternion.identity);
                     id = obj.GetInstanceID();
                     blocks[j][i] = new KeyValuePair<bool, int>(true, id);
@@ -81,6 +87,7 @@ public class Generator : MonoBehaviour {
                         }
                         else{
                             (obj as GameObject).GetComponent<Renderer>().material = yellowMat;
+                            (obj as GameObject).AddComponent<TemporaryBlockBehaviour>();
                             (obj as GameObject).AddComponent<BlockBehaviour>();
                         }
 
