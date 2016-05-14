@@ -11,6 +11,7 @@ namespace UnityStandardAssets.Vehicles.Ball
         private Vector3 originalScale;
         private Collider collider;
         private GameObject ballVisualMesh;
+        private AudioSource source;
 
         public static float Health = 100f;
         
@@ -23,7 +24,7 @@ namespace UnityStandardAssets.Vehicles.Ball
 
             ballVisualMesh = GameObject.Find("BallVisualMesh");
 
-            
+            source = ballVisualMesh.GetComponent<AudioSource>();
 
             ////originalScale = GetComponent<MeshRenderer>().transform.localScale;
         }
@@ -53,7 +54,8 @@ namespace UnityStandardAssets.Vehicles.Ball
 
         void OnCollisionEnter(Collision collision)
         {
-
+            Debug.Log(source.clip);
+            source.Play();
         }
 
 
