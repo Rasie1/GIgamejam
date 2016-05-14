@@ -28,8 +28,11 @@ public class Generator : MonoBehaviour {
             UpdateInfo();
             GenerateChunk();
         }
+<<<<<<< HEAD
         
 
+=======
+>>>>>>> 998f472a287c08ff0e4d3c1dbf1ad94cb3b663cc
     }
 
     void GenerateChunk()
@@ -97,7 +100,7 @@ public class Generator : MonoBehaviour {
         for (int i = 0; i < 4; ++i)
             for (int j = 0; j < 8; ++j)
             {
-                Destroy(UnityEditor.EditorUtility.InstanceIDToObject(blocks[i][j].Value));
+                //Destroy(UnityEditor.EditorUtility.InstanceIDToObject(blocks[i][j].Value));
             }
     }
 
