@@ -12,7 +12,8 @@ namespace UnityStandardAssets.Vehicles.Ball
         private Vector3 originalScale;
         private Collider collider;
         private GameObject ballVisualMesh;
-        private AudioSource source;
+        private AudioSource[] source;
+        float r;
 
         public static float Health = 100f;
         
@@ -22,12 +23,10 @@ namespace UnityStandardAssets.Vehicles.Ball
         {
             GetComponent<Rigidbody>().maxAngularVelocity = m_MaxAngularVelocity;
             //collider = gameObject.AddComponent<SphereCollider>();
-
+            
             ballVisualMesh = GameObject.Find("BallVisualMesh");
 
-            source = ballVisualMesh.GetComponent<AudioSource>();
-
-            ////originalScale = GetComponent<MeshRenderer>().transform.localScale;
+            source = ballVisualMesh.GetComponents<AudioSource>();
         }
 
         public void Die()
@@ -50,6 +49,7 @@ namespace UnityStandardAssets.Vehicles.Ball
             var hpCoeff = Ball.Health / 100f;
             ballVisualMesh.transform.localScale = new Vector3(width * hpCoeff, (mag / 10 + 1) * hpCoeff, width * hpCoeff);
             width = System.Math.Max(width, 0.5f);
+            GameObject.Find("Ball").GetComponent<SphereCollider>().radius = width * hpCoeff * 0.55f;
             ballVisualMesh.GetComponent<TrailRenderer>().startWidth = width;
 
             float offset = Convert.ToSingle(Time.time);
@@ -59,8 +59,14 @@ namespace UnityStandardAssets.Vehicles.Ball
 
         void OnCollisionEnter(Collision collision)
         {
-            Debug.Log(source.clip);
-            source.Play();
+            if(collision.relativeVelocity.magnitude<5){
+                source[0].Play();
+            }
+            else{
+                r = UnityEngine.Mathf.Round(UnityEngine.Random.value) + 1;
+                source[(int)r].Play();
+            }
+            Debug.Log(collision.relativeVelocity.magnitude);
         }
 
         private void animateBounce(float sqrMagnitude)

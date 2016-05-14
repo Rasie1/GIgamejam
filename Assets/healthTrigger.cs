@@ -3,11 +3,12 @@ using System.Collections;
 //using UnityEditor;
 using UnityStandardAssets.Vehicles.Ball;
 
-public class HealthTrigger : MonoBehaviour {
+public class healthTrigger : MonoBehaviour {
+    public AudioSource[] source; 
 
     // Use this for initialization
     void Start () {
-    
+        source = GameObject.Find("BallVisualMesh").GetComponents<AudioSource>();
     }
     
     // Update is called once per frame
@@ -15,10 +16,11 @@ public class HealthTrigger : MonoBehaviour {
     
     }
 
-    [SerializeField] private static float healthPackValue = 15f;
+    [SerializeField] private static float healthPackValue = 25f;
     void OnTriggerEnter(Collider myTrigger)
     {
         AddHealth(healthPackValue);
+        source[3].Play();
         Destroy(gameObject);
     }
 
@@ -27,6 +29,7 @@ public class HealthTrigger : MonoBehaviour {
         Ball.Health += healthPackValue;
         if (Ball.Health > 100)
             Ball.Health = 100;
+        
         
     }
 }
