@@ -11,7 +11,8 @@ namespace UnityStandardAssets.Vehicles.Ball
         private Vector3 originalScale;
         private Collider collider;
         private GameObject ballVisualMesh;
-        private AudioSource source;
+        private AudioSource[] source;
+        float r;
 
         public static float Health = 100f;
         
@@ -24,9 +25,7 @@ namespace UnityStandardAssets.Vehicles.Ball
             
             ballVisualMesh = GameObject.Find("BallVisualMesh");
 
-            source = ballVisualMesh.GetComponent<AudioSource>();
-
-            ////originalScale = GetComponent<MeshRenderer>().transform.localScale;
+            source = ballVisualMesh.GetComponents<AudioSource>();
         }
 
         public void Die()
@@ -55,8 +54,14 @@ namespace UnityStandardAssets.Vehicles.Ball
 
         void OnCollisionEnter(Collision collision)
         {
-            Debug.Log(source.clip);
-            source.Play();
+            if(collision.relativeVelocity.magnitude<5){
+                source[0].Play();
+            }
+            else{
+                r = UnityEngine.Mathf.Round(UnityEngine.Random.value) + 1;
+                source[(int)r].Play();
+            }
+            Debug.Log(collision.relativeVelocity.magnitude);
         }
 
         private void animateBounce(float sqrMagnitude)
