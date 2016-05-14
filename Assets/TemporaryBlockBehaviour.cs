@@ -11,8 +11,6 @@ namespace Assets
         public float DeactivateDelay;
         private float nextTime;
 
-        
-
         protected override void Activate()
         {
             base.Activate();
@@ -26,6 +24,7 @@ namespace Assets
 
         void Update()
         {
+            base.UpdateBlock();
             if (Time.time > nextTime && IsActivated)
                 IsActivated = false;
         }   
