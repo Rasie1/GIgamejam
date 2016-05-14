@@ -4,33 +4,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Assets
+public class TemporaryBlockBehaviour : BlockBehaviour
 {
-    public class TemporaryBlockBehaviour : BlockBehaviour
+    private float DeactivateDelay = 2;
+    private float nextTime;
+
+    protected override void Activate()
     {
-<<<<<<< HEAD
-        private float DeactivateDelay = 2;
-=======
-        public float DeactivateDelay = 2;
->>>>>>> 998f472a287c08ff0e4d3c1dbf1ad94cb3b663cc
-        private float nextTime;
-
-        protected override void Activate()
-        {
-            base.Activate();
-            nextTime = UnityEngine.Time.time + DeactivateDelay;
-        }
-
-        protected override void Deactivate()
-        {
-            base.Deactivate();
-        }
-
-        void Update()
-        {
-            base.UpdateBlock();
-            if (Time.time > nextTime && IsActivated)
-                IsActivated = false;
-        }   
+        base.Activate();
+        nextTime = UnityEngine.Time.time + DeactivateDelay;
     }
+
+    protected override void Deactivate()
+    {
+        base.Deactivate();
+    }
+
+    void Update()
+    {
+        base.UpdateBlock();
+        if (Time.time > nextTime && IsActivated)
+            IsActivated = false;
+    }   
 }
+
