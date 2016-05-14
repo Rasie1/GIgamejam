@@ -107,7 +107,7 @@ public class DragShotMover : MonoBehaviour {
         stretchLine.GetComponent<Renderer>().enabled = true;
 	}
 
-    public float JumpCost = 15;
+    public float JumpCost = 0;
 
 	void  OnMouseUp (){
 		mouseDragging = false;
@@ -117,7 +117,7 @@ public class DragShotMover : MonoBehaviour {
 			// cancel existing velocity
 			GetComponent<Rigidbody>().AddForce(-GetComponent<Rigidbody>().velocity, ForceMode.VelocityChange);
             Ball.Health -= JumpCost;
-            if (Ball.Health < 1)
+            if (Ball.Health < 25)
             {
                 Ball.Health = 1;
                 var ball = FindObjectOfType<Ball>();

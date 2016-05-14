@@ -13,11 +13,75 @@ public class Generator : MonoBehaviour {
     [SerializeField] public Material blueMat;
     [SerializeField] public Material yellowMat;
     [SerializeField] public Material redMat;
+
+    public int level;
+    public int biom;
+    public int numOfBioms;
+    public int[][] blockPrs;
     //private Queue<int> ids;
 
 	// Use this for initialization
 	void Start ()
     {
+        level = 0;
+
+        biom = 0;
+        blockPrs = new int[6][];
+
+        //BIOM 0
+        blockPrs[0] = new int[5];
+        blockPrs[0][0] = 100;
+        blockPrs[0][1] = 0;
+        blockPrs[0][2] = 0;
+        blockPrs[0][3] = 0;
+        blockPrs[0][4] = 95;
+        ++numOfBioms;
+
+        //BIOM 1
+        blockPrs[1] = new int[5];
+        blockPrs[1][0] = 75;
+        blockPrs[1][1] = 0;
+        blockPrs[1][2] = 100;
+        blockPrs[1][3] = 0;
+        blockPrs[1][4] = 90;
+        ++numOfBioms;
+
+        //BIOM 2
+        blockPrs[2] = new int[5];
+        blockPrs[2][0] = 50;
+        blockPrs[2][1] = 0;
+        blockPrs[2][2] = 100;
+        blockPrs[2][3] = 0;
+        blockPrs[2][4] = 90;
+        ++numOfBioms;
+
+        //BIOM 3
+        blockPrs[3] = new int[5];
+        blockPrs[3][0] = 25;
+        blockPrs[3][1] = 0;
+        blockPrs[3][2] = 75;
+        blockPrs[3][3] = 100;
+        blockPrs[3][4] = 90;
+        ++numOfBioms;
+
+        //BIOM 4
+        blockPrs[4] = new int[5];
+        blockPrs[4][0] = 25;
+        blockPrs[4][1] = 0;
+        blockPrs[4][2] = 50;
+        blockPrs[4][3] = 100;
+        blockPrs[4][4] = 90;
+        ++numOfBioms;
+
+        //BIOM 5
+        blockPrs[5] = new int[5];
+        blockPrs[5][0] = 25;
+        blockPrs[5][1] = 50;
+        blockPrs[5][2] = 75;
+        blockPrs[5][3] = 100;
+        blockPrs[5][4] = 85;
+        ++numOfBioms;
+
         //    ids = new Queue<int>();
         KeyValuePair<bool, int> def = new KeyValuePair<bool, int>(false, 0);
         blocks = new List<List<KeyValuePair<bool, int>>>(24);
@@ -32,6 +96,13 @@ public class Generator : MonoBehaviour {
 
     void GenerateChunk()
     {
+        ++level;
+        if(level>=10){
+            if(numOfBioms > biom+1)
+                biom++;
+            level = 0;
+        };
+        Debug.Log("Current level: "+level+", Biom: "+biom);
         for (int j = 20; j < 24; ++j) 
         {
             for (int i = 0; i < 8; ++i)
@@ -72,22 +143,21 @@ public class Generator : MonoBehaviour {
                         (obj as GameObject).transform.localScale = new Vector3(1.7f, 1.4f, 1.4f);
                         (obj as GameObject).transform.position += new Vector3(0, 0.35f, 0.35f);
                     }
-                    if(r > 0.9){
-                        if(rColor < 0.25){
+                    if(r > (float)blockPrs[biom][4]/100){
+                        if(rColor < (float)blockPrs[biom][0]/100){
                             (obj as GameObject).GetComponent<Renderer>().material = greenMat;
                             (obj as GameObject).AddComponent<TemporaryBlockBehaviour>();
                         }
-                        else if(rColor < 0.5){
+                        else if(rColor < (float)blockPrs[biom][1]/100){
                             (obj as GameObject).GetComponent<Renderer>().material = blueMat;
                             (obj as GameObject).AddComponent<BlockBehaviour>();
                         }
-                        else if(rColor < 0.75){
+                        else if(rColor < (float)blockPrs[biom][2]/100){
                             (obj as GameObject).GetComponent<Renderer>().material = redMat;
                             (obj as GameObject).AddComponent<ActivatedBlockBehaviour>();
                         }
                         else{
                             (obj as GameObject).GetComponent<Renderer>().material = yellowMat;
-                            (obj as GameObject).AddComponent<TemporaryBlockBehaviour>();
                             (obj as GameObject).AddComponent<BlockBehaviour>();
                         }
 
@@ -139,4 +209,10 @@ public class Generator : MonoBehaviour {
         wallRight.transform.position = wallRightPos;
 
     }
+
+    //void NewBiom(int index, int green, int red, int blue, int yellow, int overall){
+    //    probabilities = new int[5];
+
+    //    return probabilities;
+    //} 
 }
