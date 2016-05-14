@@ -38,6 +38,9 @@ namespace UnityStandardAssets.Vehicles.Ball
             ballVisualMesh.transform.localScale = new Vector3(width, mag / 10 + 1, width);
             ballVisualMesh.GetComponent<TrailRenderer>().startWidth = width;
 
+            float offset = Convert.ToSingle(Time.time);
+            GetComponent<Renderer>().material.SetTextureOffset("_MainTex", new Vector2(offset,0));
+
         }
 
         void OnCollisionEnter(Collision collision)

@@ -37,7 +37,7 @@ public class Generator : MonoBehaviour {
                     Object obj = Instantiate(Resources.Load("Cube") as GameObject, new Vector3(-3.5f, -5 + height, -2.5f + 0.7f * i), Quaternion.identity);
                     id = obj.GetInstanceID();
                     blocks[j][i] = new KeyValuePair<bool, int>(true, id);
-                    Debug.Log(blocks[20][i].ToString() + " " + blocks[21][i].ToString() + " " + blocks[22][i].ToString() + " " + blocks[23][i].ToString() + "\n DEBUG");
+                    //Debug.Log(blocks[20][i].ToString() + " " + blocks[21][i].ToString() + " " + blocks[22][i].ToString() + " " + blocks[23][i].ToString() + "\n DEBUG");
                     if (r > 0.75 && r <= 0.85 && i != 7 && !blocks[j][i + 1].Key)
                     {
                         blocks[j][i + 1] = new KeyValuePair<bool, int>(true, id);

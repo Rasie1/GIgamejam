@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections;
  
 [RequireComponent (typeof(Rigidbody))]
-[RequireComponent (typeof(Collider))]
  
 public class DragShotMover : MonoBehaviour {
  
