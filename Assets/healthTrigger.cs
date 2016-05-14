@@ -3,7 +3,7 @@ using System.Collections;
 //using UnityEditor;
 using UnityStandardAssets.Vehicles.Ball;
 
-public class HealthTrigger : MonoBehaviour {
+public class healthTrigger : MonoBehaviour {
     public AudioSource[] source; 
 
     // Use this for initialization
@@ -16,9 +16,9 @@ public class HealthTrigger : MonoBehaviour {
     
     }
 
-    [SerializeField] private static float healthPackValue = 100f;
+    [SerializeField] private static float healthPackValue = 25f;
     void OnTriggerEnter(Collider myTrigger)
-    {
+    { 
         AddHealth(healthPackValue);
         source[3].Play();
         Destroy(gameObject);
@@ -26,10 +26,6 @@ public class HealthTrigger : MonoBehaviour {
 
     public static void AddHealth(float value)
     {
-        Ball.Health += healthPackValue;
-        if (Ball.Health > 100)
-            Ball.Health = 100;
-        
-        
+        Ball.Health += (Ball.Health <= 100) ? healthPackValue : 1;
     }
 }

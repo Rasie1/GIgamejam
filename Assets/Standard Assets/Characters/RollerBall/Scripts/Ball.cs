@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace UnityStandardAssets.Vehicles.Ball
 {
@@ -31,6 +32,10 @@ namespace UnityStandardAssets.Vehicles.Ball
         public void Die()
         {
             Debug.Log("YOU DIED");
+            UnityEngine.UI.Text text = GameObject.Find("TextOfDeath").GetComponent<UnityEngine.UI.Text>();
+            text.color = new Color(0f, 0f, 0f, 1f);
+            Health = 100f;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         private void Update()
         {
@@ -44,7 +49,7 @@ namespace UnityStandardAssets.Vehicles.Ball
             var hpCoeff = Ball.Health / 100f;
             ballVisualMesh.transform.localScale = new Vector3(width * hpCoeff, (mag / 10 + 1) * hpCoeff, width * hpCoeff);
             width = System.Math.Max(width, 0.5f);
-            GameObject.Find("Ball").GetComponent<SphereCollider>().radius = width * hpCoeff * 0.5f;
+            GameObject.Find("Ball").GetComponent<SphereCollider>().radius = width * hpCoeff * 0.55f;
             ballVisualMesh.GetComponent<TrailRenderer>().startWidth = width;
 
             float offset = Convert.ToSingle(Time.time);
@@ -61,7 +66,7 @@ namespace UnityStandardAssets.Vehicles.Ball
                 r = UnityEngine.Mathf.Round(UnityEngine.Random.value) + 1;
                 source[(int)r].Play();
             }
-            Debug.Log(collision.relativeVelocity.magnitude);
+            //Debug.Log(collision.relativeVelocity.magnitude);
         }
 
         private void animateBounce(float sqrMagnitude)
