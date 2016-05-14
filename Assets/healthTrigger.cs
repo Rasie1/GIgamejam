@@ -21,7 +21,7 @@ public class healthTrigger : MonoBehaviour {
     {
         AddHealth(healthPackValue);
         source[3].Play();
-        Destroy(gameObject);
+        gameObject.transform.position = new Vector3(100000, 0, 0);
     }
 
     public static void AddHealth(float value)

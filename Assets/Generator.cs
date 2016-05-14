@@ -6,6 +6,7 @@ public class Generator : MonoBehaviour {
     
     private float height = 0;
     private List<List<GameObject>> blocks;
+    public List<GameObject> pickups = null;
 
     [SerializeField] public GameObject wallLeft;
     [SerializeField] public GameObject wallRight;
@@ -20,6 +21,7 @@ public class Generator : MonoBehaviour {
     {
         //    ids = new Queue<int>();
         blocks = new List<List<GameObject>>(24);
+        pickups = new List<GameObject>();
         for (int i = 0; i < 24; ++i)
             blocks.Add(new List<GameObject> { null, null, null, null, null, null, null, null });
         for (int i = 0; i < 6; ++i)
@@ -43,9 +45,19 @@ public class Generator : MonoBehaviour {
                 if (!blocks[j][i])
                 {
                     var shouldSpawnHealthpack = Random.value > 0.9;
+                    for (int pickup = pickups.Count - 1; pickup >= 0; --pickup)
+                    {
+                        var x = pickups[pickup];
+                        if (Vector3.SqrMagnitude(x.transform.position - GameObject.Find("Ball").transform.position) > 256f)
+                        {
+                            Destroy(x);
+                            pickups.RemoveAt(pickup);
+                        }
+                    }
                     if (shouldSpawnHealthpack)
                     {
                         Object pickup = Instantiate(Resources.Load("HealthPack") as GameObject, new Vector3(-1.7f, -5 + height, -2.5f + 0.7f * i), Quaternion.identity);
+                        pickups.Add(pickup as GameObject);
                     }
                     Object obj = Instantiate(Resources.Load("Cube") as GameObject, new Vector3(-3.5f, -5 + height, -2.5f + 0.7f * i), Quaternion.identity);
                     blocks[j][i] = obj as GameObject;
@@ -120,18 +132,19 @@ public class Generator : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (GameObject.Find("Ball").transform.position.y > height - 15 * 0.7f)
+        var ball = GameObject.Find("Ball");
+        if (ball.transform.position.y > height - 15 * 0.7f)
         {
             DestroyChunk();
             UpdateInfo();
             GenerateChunk();
         };
         Vector3 wallLeftPos = wallLeft.transform.position;
-        wallLeftPos.y = GameObject.Find("Ball").transform.position.y;
-        wallLeftPos.x = GameObject.Find("Ball").transform.position.x;
+        wallLeftPos.y = ball.transform.position.y;
+        wallLeftPos.x = ball.transform.position.x;
         Vector3 wallRightPos = wallRight.transform.position;
-        wallRightPos.y = GameObject.Find("Ball").transform.position.y;
-        wallRightPos.x = GameObject.Find("Ball").transform.position.x;
+        wallRightPos.y = ball.transform.position.y;
+        wallRightPos.x = ball.transform.position.x;
 
         wallLeft.transform.position = wallLeftPos;
         wallRight.transform.position = wallRightPos;
