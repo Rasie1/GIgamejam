@@ -37,6 +37,7 @@ public class BlockBehaviour : MonoBehaviour {
 
     protected void Activate() {
         Debug.Log("Block activated");
+        this.transform.Translate(2, 0, 0);
     }
 
     protected void Deactivate()
@@ -46,23 +47,22 @@ public class BlockBehaviour : MonoBehaviour {
 
 	void Start () {
         IsActivated = false;
-        deactivatedPosition = this.transform.position;
-        activatedPosition = this.transform.position;
+        //deactivatedPosition = this.transform.position;
+        //activatedPosition = this.transform.position;
 
-        activatedPosition.Set(0, 0, -200);
-        Debug.Log("1:");
-        Debug.Log(activatedPosition);
-        Debug.Log("2:");
-        Debug.Log(transform.position);
+        //activatedPosition.Set(0, 0, -200);
+        //Debug.Log("1:");
+        //Debug.Log(activatedPosition);
+        //Debug.Log("2:");
+        //Debug.Log(transform.position);
 	}
 
     void Update()
     {
-        if (IsActivated)
-        {
-            Debug.Log(transform.position);
-            Vector3.MoveTowards(this.transform.position, activatedPosition, activationMoveSpeed * Time.deltaTime);
-        }
+        //if (IsActivated)
+        //{
+        //    Vector3.MoveTowards(this.transform.position, activatedPosition, activationMoveSpeed * Time.deltaTime);
+        //}
 	}   
 
     void OnMouseDown() {
