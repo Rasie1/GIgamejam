@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityStandardAssets.Vehicles.Ball;
 
 public class Generator : MonoBehaviour {
     
@@ -125,7 +126,10 @@ public class Generator : MonoBehaviour {
             DestroyChunk();
             UpdateInfo();
             GenerateChunk();
-        };
+        } else if (GameObject.Find("Ball").transform.position.y < height - 32 * 0.7f)
+        {
+            FindObjectOfType<Ball>().Die();
+        }
         Vector3 wallLeftPos = wallLeft.transform.position;
         wallLeftPos.y = GameObject.Find("Ball").transform.position.y;
         wallLeftPos.x = GameObject.Find("Ball").transform.position.x;
