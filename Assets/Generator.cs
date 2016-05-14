@@ -169,7 +169,9 @@ public class Generator : MonoBehaviour {
                         blocks[j][i + 1] = obj as GameObject;
                         (obj as GameObject).transform.localScale = new Vector3(1.7f, 1.4f, 1.4f);
                         (obj as GameObject).transform.position += new Vector3(0, 0.35f, 0.35f);
-                    }
+                    };
+
+                    //Coloring
                     if(r > (float)blockPrs[biom][4]/100){
                         if(rColor < (float)blockPrs[biom][0]/100){
                             (obj as GameObject).GetComponent<Renderer>().material = greenMat;
