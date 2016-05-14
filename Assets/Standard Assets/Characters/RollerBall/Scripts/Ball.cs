@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace UnityStandardAssets.Vehicles.Ball
 {
@@ -32,6 +33,10 @@ namespace UnityStandardAssets.Vehicles.Ball
         public void Die()
         {
             Debug.Log("YOU DIED");
+            UnityEngine.UI.Text text = GameObject.Find("TextOfDeath").GetComponent<UnityEngine.UI.Text>();
+            text.color = new Color(0f, 0f, 0f, 1f);
+            Health = 100f;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         private void Update()
         {
