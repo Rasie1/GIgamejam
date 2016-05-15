@@ -106,7 +106,7 @@ namespace UnityStandardAssets.Vehicles.Ball
         void OnCollisionEnter(Collision collision)
         {
             
-            if(collision.gameObject.GetComponent<BouncingBlockBehaviour>()){
+            if (collision.gameObject.GetComponent<BouncingBlockBehaviour>()){
                 Vector3 newVelocity;
                 newVelocity.x = GetComponent<Rigidbody>().velocity.x*1.5f;
                 newVelocity.y = GetComponent<Rigidbody>().velocity.y*1.5f;
@@ -114,10 +114,10 @@ namespace UnityStandardAssets.Vehicles.Ball
                 GetComponent<Rigidbody>().velocity =  newVelocity;
                 //Debug.Log(newVelocity);
             };
-            if(collision.relativeVelocity.magnitude<5){
+            if (collision.relativeVelocity.magnitude<5){
                 source[0].Play();
             }
-            else{
+            else {
                 r = UnityEngine.Mathf.Round(UnityEngine.Random.value) + 1;
                 source[(int)r].Play();
             }
@@ -163,6 +163,12 @@ namespace UnityStandardAssets.Vehicles.Ball
             Ball.Health = 25;
             isLastChanceActive = true;
             lastChanceDamageCounter = lastChanceDamageDelay;
+        }
+
+        public void SucceedLastChance()
+        {
+            isLastChanceActive = false;
+            GameObject.Find("ImageLastChance").GetComponent<UnityEngine.UI.Image>().enabled = false;
         }
     }
 }

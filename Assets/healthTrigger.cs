@@ -20,6 +20,8 @@ public class healthTrigger : MonoBehaviour {
     void OnTriggerEnter(Collider myTrigger)
     { 
         AddHealth(healthPackValue);
+        var ball = FindObjectOfType<Ball>();
+        ball.SucceedLastChance();
         source[3].Play();
         gameObject.transform.position = new Vector3(100000, 0, 0);
     }
