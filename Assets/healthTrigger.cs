@@ -28,6 +28,9 @@ public class healthTrigger : MonoBehaviour {
 
     public static void AddHealth(float value)
     {
-        Ball.Health += (Ball.Health <= 100) ? healthPackValue : 1;
+        var ball = GameObject.FindObjectOfType<Ball>();
+        var newValue = ball.CurrentHealth + value;
+        if (newValue > 100f)
+            newValue = 100f;
     }
 }

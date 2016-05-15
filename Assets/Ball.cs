@@ -19,7 +19,7 @@ namespace UnityStandardAssets.Vehicles.Ball
 
         float r;
 
-        public static float Health = 100f;
+        public float CurrentHealth = 100f;
         public bool hope = true;
 
         UnityEngine.UI.Text Scores;
@@ -72,22 +72,23 @@ namespace UnityStandardAssets.Vehicles.Ball
                 if (lastChanceDamageCounter == 0)
                 {
                     lastChanceDamageCounter = lastChanceDamageDelay;
-                    Ball.Health -= 3;
+                    CurrentHealth -= 3;
                 }
             }
-            if (deathCounter > 0) ++deathCounter;
+            if (deathCounter > 0) 
+                ++deathCounter;
             if (deathCounter > 60)
             {
                 hope = true;
                 deathCounter = 0;
-                Health = 100f;
+                CurrentHealth = 100f;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }
   
         private void Update()
         {
-            if (Ball.Health < 1)
+            if (CurrentHealth < 1)
             {
                 Die();
                 isLastChanceActive = false;
@@ -98,7 +99,7 @@ namespace UnityStandardAssets.Vehicles.Ball
             ballVisualMesh.transform.up = vel;
             var mag = vel.magnitude;
             var width = System.Math.Min(5 / mag, 1);
-            var hpCoeff = 0.1f + Ball.Health / 100f;
+            var hpCoeff = 0.1f + CurrentHealth / 100f;
             ballVisualMesh.transform.localScale = new Vector3(width * hpCoeff, (mag / 10 + 1) * hpCoeff, width * hpCoeff);
             width = System.Math.Max(width, 0.5f);
             GameObject.Find("Ball").GetComponent<SphereCollider>().radius = width * hpCoeff * 0.55f;
@@ -156,14 +157,14 @@ namespace UnityStandardAssets.Vehicles.Ball
         }
         public float getHealth()
         {
-            return Health;
+            return CurrentHealth;
         }
 
         private bool isLastChanceActive = false;
 
         public void ActivateLastChanceMode()
         {
-            Ball.Health = 25;
+            CurrentHealth = 25;
             isLastChanceActive = true;
             lastChanceDamageCounter = lastChanceDamageDelay;
         }
