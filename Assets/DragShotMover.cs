@@ -144,18 +144,21 @@ public class DragShotMover : MonoBehaviour {
 
         float maxJumpCost = 18f;
         float jumpCost = maxJumpCost * force.sqrMagnitude / 100f;
- 
+
+
+
 		if (overrideVelocity) {
 			// cancel existing velocity
 			GetComponent<Rigidbody>().AddForce(-GetComponent<Rigidbody>().velocity, ForceMode.VelocityChange);
-            if (Ball.Health < jumpCost)
+            var ball = GameObject.FindObjectOfType<Ball>();
+
+            if (ball.CurrentHealth < jumpCost)
             {
-                var ball = FindObjectOfType<Ball>();
                 //ball.Die();
                 ball.ActivateLastChanceMode();
             }
-            Ball.Health -= jumpCost;
-            if (Ball.Health < maxJumpCost)
+            ball.CurrentHealth -= jumpCost;
+            if (ball.CurrentHealth < maxJumpCost)
                 GameObject.Find("ImageLastChance").GetComponent<UnityEngine.UI.Image>().enabled = true;
  
 		}

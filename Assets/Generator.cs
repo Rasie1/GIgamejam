@@ -128,7 +128,6 @@ public class Generator : MonoBehaviour {
             {
                 
                 //Debug.Log(Instantiate(Resources.Load("Cube") as GameObject, new Vector3(-3.5f, -5 + height, -2.5f + 0.7f * i), Quaternion.identity).GetInstanceID());
-                int id = 0;
                 float r = Random.value;
                 float rColor = Random.value;
                 if (!blocks[j][i])
