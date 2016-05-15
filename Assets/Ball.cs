@@ -109,6 +109,7 @@ namespace UnityStandardAssets.Vehicles.Ball
 
         void OnCollisionEnter(Collision collision)
         {
+            
             if(collision.gameObject.GetComponent<BouncingBlockBehaviour>()){
                 Vector3 newVelocity;
                 newVelocity.x = GetComponent<Rigidbody>().velocity.x*1.5f;
@@ -125,6 +126,12 @@ namespace UnityStandardAssets.Vehicles.Ball
                 source[(int)r].Play();
             }
             //Debug.Log(collision.relativeVelocity.magnitude);
+        }
+
+        void OnTriggerEnter(Collider collider)
+        {
+            if (collider.gameObject.tag == "DeadPool")
+                Instantiate(Resources.Load("WaterDrop"), this.transform.position + new Vector3(0,0.3f,0), new Quaternion(180,90,180,0));
         }
 
         private void animateBounce(float sqrMagnitude)

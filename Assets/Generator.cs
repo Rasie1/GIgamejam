@@ -220,6 +220,12 @@ public class Generator : MonoBehaviour {
             {
                 Destroy(blocks[i][j]);
             }
+        var obj = GameObject.Find("AcidPool(Clone)");
+        if (obj)
+            Destroy(obj);
+        var quat = new Quaternion(0, 0, 0, 0);
+        quat.SetEulerRotation(0, 0, -0.8f);
+        Instantiate(Resources.Load("AcidPool"), new Vector3(6.0f, height - 0.7f * 40.4f, 0), quat);
     }
 
     void UpdateInfo()
