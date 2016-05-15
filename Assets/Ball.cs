@@ -62,7 +62,7 @@ namespace UnityStandardAssets.Vehicles.Ball
                 hope = true;
                 counter = 0;
                 Health = 100f;
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                SceneManager.LoadScene("MainScene");
             }
             ballVisualMesh.transform.position = this.transform.position;
 
