@@ -12,6 +12,7 @@ namespace UnityStandardAssets.Vehicles.Ball
         private Vector3 originalScale;
         private Collider collider;
         private GameObject ballVisualMesh;
+        private GameObject eye;
         private AudioSource[] source;
         private int score;
         private int Hscore;
@@ -30,8 +31,9 @@ namespace UnityStandardAssets.Vehicles.Ball
             Hscore = PlayerPrefs.GetInt("Hscore");
             GetComponent<Rigidbody>().maxAngularVelocity = m_MaxAngularVelocity;
             //collider = gameObject.AddComponent<SphereCollider>();
-            
+
             ballVisualMesh = GameObject.Find("BallVisualMesh");
+            eye = GameObject.Find("Eye");
 
             source = ballVisualMesh.GetComponents<AudioSource>();
 
@@ -94,6 +96,9 @@ namespace UnityStandardAssets.Vehicles.Ball
                 isLastChanceActive = false;
             }
             ballVisualMesh.transform.position = this.transform.position;
+            
+            eye.transform.position = new Vector3(transform.position.x + 1f, transform.position.y + 0.1f, transform.position.z);
+
 
             var vel = GetComponent<Rigidbody>().velocity;
             ballVisualMesh.transform.up = vel;
@@ -104,6 +109,12 @@ namespace UnityStandardAssets.Vehicles.Ball
             width = System.Math.Max(width, 0.5f);
             GameObject.Find("Ball").GetComponent<SphereCollider>().radius = width * hpCoeff * 0.55f;
             ballVisualMesh.GetComponent<TrailRenderer>().startWidth = width;
+
+            //eye.transform.LookAt(vel);
+            //eye.transform.rotation = new Quaternion(eye.transform.rotation.x, eye.transform.rotation.y, 0, 0);
+            eye.transform.rotation = new Quaternion();
+            //eye.transform.rotation.SetEulerAngles(eye.transform.rotation.x, 90, eye.transform.rotation.z);
+            eye.transform.Rotate(0, 90, 0);
 
             float offset = Convert.ToSingle(Time.time);
             GetComponent<Renderer>().material.SetTextureOffset("_MainTex", new Vector2(offset,0));
