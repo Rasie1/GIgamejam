@@ -37,23 +37,23 @@ namespace UnityStandardAssets.Vehicles.Ball
 
         public void Die()
         {
-            Debug.Log("YOU DIED");
             if (counter == 0)
             {
                 GameObject.Find("ImageDied").GetComponent<UnityEngine.UI.Image>().enabled = true;
+                counter = 1;
             }
-            else if (counter > 100)
-            {
-                counter = 0;
-                Health = 100f;
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            }
-            ++counter;
         }
 
   
         private void Update()
         {
+            if (counter > 0) ++counter;
+            if (counter>60)
+            {
+                counter = 0;
+                Health = 100f;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
             ballVisualMesh.transform.position = this.transform.position;
 
             var vel = GetComponent<Rigidbody>().velocity;

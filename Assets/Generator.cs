@@ -158,7 +158,7 @@ public class Generator : MonoBehaviour {
                             (obj as GameObject).GetComponent<Renderer>().material = greyMat;
                             (obj as GameObject).AddComponent<DisabledActivatedBlockBehaviour>();
                         }
-                        else if (rColor < (float)blockPrs[biom][7] / 100)
+                        else if (rColor < (float)blockPrs[biom][6] / 100)
                         {
                             (obj as GameObject).GetComponent<Renderer>().material = greyMat;
                             (obj as GameObject).AddComponent<BouncingBlockBehaviour>();
