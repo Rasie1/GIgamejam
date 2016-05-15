@@ -116,21 +116,28 @@ public class DragShotMover : MonoBehaviour {
         stretchLine.GetComponent<Renderer>().enabled = true;
 	}
 
-    public float JumpCost;
-
 	void  OnMouseUp (){
-        if(!mouseDragging){
+        if (!mouseDragging) {
             stretchLine.GetComponent<Renderer>().enabled = false;
             return;
         }
 		mouseDragging = false;
 		stretchLine.GetComponent<Renderer>().enabled = false;
+
+		// add new force
+		int snapD = 1;
+		if (snapDirection == SnapDir.away) 
+            snapD = -1; // if snapdirection is "away" set the force to apply in the opposite direction
+        var force = snapD * forceVector;
+		GetComponent<Rigidbody>().AddForce(force, forceTypeToApply);
+
+        float jumpCost = 25f * force.sqrMagnitude / 100f;
  
 		if (overrideVelocity) {
 			// cancel existing velocity
 			GetComponent<Rigidbody>().AddForce(-GetComponent<Rigidbody>().velocity, ForceMode.VelocityChange);
-            Ball.Health -= JumpCost;
-            if (Ball.Health < 25)
+            Ball.Health -= jumpCost;
+            if (Ball.Health < jumpCost)
             {
                 Ball.Health = 1;
                 var ball = FindObjectOfType<Ball>();
@@ -138,12 +145,6 @@ public class DragShotMover : MonoBehaviour {
             }
  
 		}
- 
-		// add new force
-		int snapD = 1;
-		if (snapDirection == SnapDir.away) snapD = -1; // if snapdirection is "away" set the force to apply in the opposite direction
-		GetComponent<Rigidbody>().AddForce(snapD * forceVector, forceTypeToApply);
-
  
 		if (pauseOnDrag) {
 			// un-pause the simulation
