@@ -36,11 +36,11 @@ public class Generator : MonoBehaviour {
         NewBiom(
             0, //percentage of white blocks
             0, //green
-            100, //blue
+            0, //blue
             0, //red
             0, // yellow
             0,//gray1
-            0, //gray2
+            100, //gray2
             ref blockPrs,ref numOfBioms);
 
         //WHITE BIOM
@@ -188,12 +188,12 @@ public class Generator : MonoBehaviour {
 
     void DestroyChunk()
     {
-       /* for (int i = 0; i < 4; ++i)
+        for (int i = 0; i < 4; ++i)
             for (int j = 0; j < 8; ++j)
             {
                 
                 Destroy(blocks[i][j]);
-            }*/
+            }
     }
 
     void UpdateInfo()

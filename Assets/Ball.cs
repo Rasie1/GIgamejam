@@ -90,7 +90,7 @@ namespace UnityStandardAssets.Vehicles.Ball
                 newVelocity.y = GetComponent<Rigidbody>().velocity.y*1.5f;
                 newVelocity.z = GetComponent<Rigidbody>().velocity.z*1.5f;
                 GetComponent<Rigidbody>().velocity =  newVelocity;
-                Debug.Log(newVelocity);
+                //Debug.Log(newVelocity);
             };
             if(collision.relativeVelocity.magnitude<5){
                 source[0].Play();
