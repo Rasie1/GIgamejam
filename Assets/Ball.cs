@@ -88,8 +88,6 @@ namespace UnityStandardAssets.Vehicles.Ball
   
         private void Update()
         {
-            Debug.Log(this);
-            Debug.Log(CurrentHealth);
             if (CurrentHealth < 1)
             {
                 Die();
