@@ -28,6 +28,8 @@ public class DragShotMover : MonoBehaviour {
 	private Plane dragPlane;
 	private Ray mouseRay;
 
+	private AudioSource[] ballSounds;
+
 	void Stretch(GameObject _sprite,Vector3 _initialPosition, Vector3 _finalPosition, bool _mirrorZ) {
         _initialPosition.y += 0.5f;
 		_initialPosition.x = _sprite.transform.position.x;
@@ -56,6 +58,7 @@ public class DragShotMover : MonoBehaviour {
 		// create the dragplane
 		dragPlane = new Plane(dragPlaneNormal, GetComponent<Rigidbody>().transform.position);
 		stretchLine.GetComponent<Renderer>().enabled = false;
+		ballSounds = GameObject.Find("BallVisualMesh").GetComponents<AudioSource>();
  
 	}
  
@@ -150,6 +153,9 @@ public class DragShotMover : MonoBehaviour {
 			// un-pause the simulation
 			Time.timeScale = 1;
 		}
+		ballSounds[4].volume = Mathf.Round((forceVector).magnitude)/10f;
+		ballSounds[4].Play();
+		
 	}
 
 	
