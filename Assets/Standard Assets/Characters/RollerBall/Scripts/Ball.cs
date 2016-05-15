@@ -19,6 +19,7 @@ namespace UnityStandardAssets.Vehicles.Ball
         float r;
 
         public static float Health = 100f;
+        public bool hope = true;
         
         
 
@@ -32,13 +33,21 @@ namespace UnityStandardAssets.Vehicles.Ball
 
             source = ballVisualMesh.GetComponents<AudioSource>();
 
-            GameObject.Find("ImageDied").GetComponent<UnityEngine.UI.Image>().enabled = false;
+            UnityEngine.UI.Image image = GameObject.Find("ImageDied").GetComponent<UnityEngine.UI.Image>();
+            float scale = Screen.width / image.rectTransform.rect.width;
+            Vector3 newScale = image.transform.localScale;
+            newScale.x = scale;
+            newScale.y = scale;
+            image.transform.localScale = newScale;
+
+            image.enabled = false;
         }
 
         public void Die()
         {
             if (counter == 0)
             {
+                hope = false;
                 GameObject.Find("ImageDied").GetComponent<UnityEngine.UI.Image>().enabled = true;
                 counter = 1;
             }
@@ -50,6 +59,7 @@ namespace UnityStandardAssets.Vehicles.Ball
             if (counter > 0) ++counter;
             if (counter>60)
             {
+                hope = true;
                 counter = 0;
                 Health = 100f;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -104,6 +114,10 @@ namespace UnityStandardAssets.Vehicles.Ball
             }
 
             GUI.Box ( new Rect(10, 10, 100, 20), "Scores: " +score);
+        }
+        public float getHealth()
+        {
+            return Health;
         }
     }
 }
