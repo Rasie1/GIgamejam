@@ -11,12 +11,14 @@ public class TemporaryBlockBehaviour : BlockBehaviour
 
     protected override void Activate()
     {
+        Debug.Log("1");
         base.Activate();
         nextTime = UnityEngine.Time.time + DeactivateDelay;
     }
 
     protected override void Deactivate()
     {
+        Debug.Log("2");
         base.Deactivate();
     }
 
