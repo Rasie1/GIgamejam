@@ -82,7 +82,7 @@ namespace UnityStandardAssets.Vehicles.Ball
                 hope = true;
                 deathCounter = 0;
                 CurrentHealth = 100f;
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                SceneManager.LoadScene("MainScene");
             }
         }
   
