@@ -32,7 +32,7 @@ public class Generator : MonoBehaviour {
         blockPrs = new int[8][];
         numOfBioms = 0;
 
-        NewBiom(0,0,0,0,0,100,0,ref blockPrs,ref numOfBioms);
+        NewBiom(0,100,0,0,0,100,0,ref blockPrs,ref numOfBioms);
 
         //BIOM 1
         NewBiom(95,100,0,0,0,0,0,ref blockPrs,ref numOfBioms);
@@ -141,7 +141,7 @@ public class Generator : MonoBehaviour {
                         }
                         else if(rColor < (float)blockPrs[biom][2]/100){
                             (obj as GameObject).GetComponent<Renderer>().material = blueMat;
-                            (obj as GameObject).AddComponent<BlockBehaviour>();
+                            (obj as GameObject).AddComponent<BouncingBlockBehaviour>();
                         }
                         else if (rColor < (float)blockPrs[biom][3] / 100)
                         {
