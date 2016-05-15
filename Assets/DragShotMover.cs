@@ -134,7 +134,7 @@ public class DragShotMover : MonoBehaviour {
         var force = snapD * forceVector;
 		GetComponent<Rigidbody>().AddForce(force, forceTypeToApply);
 
-        float jumpCost = 25f * force.sqrMagnitude / 100f;
+        float jumpCost = 18f * force.sqrMagnitude / 100f;
  
 		if (overrideVelocity) {
 			// cancel existing velocity
