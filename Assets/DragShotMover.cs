@@ -79,14 +79,14 @@ public class DragShotMover : MonoBehaviour {
 	void  OnMouseDrag (){
 
         //Debug.Log(GetComponent<Rigidbody>().velocity.magnitude);
-        if(GetComponent<Rigidbody>().velocity.magnitude > 2){
-            mouseDragging = false;
-            stretchLine.GetComponent<Renderer>().enabled = false;
-            return;
-        }
-        else{
-            mouseDragging = true;
-        }
+        //if(GetComponent<Rigidbody>().velocity.magnitude > 2){
+        //    mouseDragging = false;
+        //    stretchLine.GetComponent<Renderer>().enabled = false;
+        //    return;
+        //}
+        //else{
+        //    mouseDragging = true;
+        //}
 		Vector3 pos = Input.mousePosition;
 		pos.z = 0;
 		pos = cam.ScreenToWorldPoint(pos);
