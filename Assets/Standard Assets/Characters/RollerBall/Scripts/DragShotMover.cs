@@ -75,6 +75,15 @@ public class DragShotMover : MonoBehaviour {
  
 	void  OnMouseDrag (){
 
+        //Debug.Log(GetComponent<Rigidbody>().velocity.magnitude);
+        if(GetComponent<Rigidbody>().velocity.magnitude > 2){
+            mouseDragging = false;
+            stretchLine.GetComponent<Renderer>().enabled = false;
+            return;
+        }
+        else{
+            mouseDragging = true;
+        }
 		Vector3 pos = Input.mousePosition;
 		pos.z = 0;
 		pos = cam.ScreenToWorldPoint(pos);
@@ -107,9 +116,13 @@ public class DragShotMover : MonoBehaviour {
         stretchLine.GetComponent<Renderer>().enabled = true;
 	}
 
-    public float JumpCost = 0;
+    public float JumpCost;
 
 	void  OnMouseUp (){
+        if(!mouseDragging){
+            stretchLine.GetComponent<Renderer>().enabled = false;
+            return;
+        }
 		mouseDragging = false;
 		stretchLine.GetComponent<Renderer>().enabled = false;
  
@@ -136,11 +149,7 @@ public class DragShotMover : MonoBehaviour {
 			// un-pause the simulation
 			Time.timeScale = 1;
 		}
-
-
-
 	}
-
 
 	
 	void  OnGUI (){

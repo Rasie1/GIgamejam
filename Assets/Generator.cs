@@ -23,8 +23,8 @@ public class Generator : MonoBehaviour {
     private int[][] blockPrs;
     //private Queue<int> ids;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
         level = 0;
 
@@ -32,7 +32,15 @@ public class Generator : MonoBehaviour {
         blockPrs = new int[8][];
         numOfBioms = 0;
 
-        NewBiom(0,100,0,0,0,100,0,ref blockPrs,ref numOfBioms);
+        NewBiom(
+            0, //percentage of white blocks
+            0, //green
+            0, //blue
+            0, //red
+            0, // yellow
+            0,//gray1
+            100, //gray2
+            ref blockPrs,ref numOfBioms);
 
         //BIOM 1
         NewBiom(95,100,0,0,0,0,0,ref blockPrs,ref numOfBioms);
@@ -44,16 +52,16 @@ public class Generator : MonoBehaviour {
         NewBiom(90,50,0,100,0,0,0,ref blockPrs,ref numOfBioms);
 
         //BIOM 4
-        NewBiom(90,25,0,75,0,0,100,ref blockPrs,ref numOfBioms);
+        NewBiom(90,25,100,75,0,0,0,ref blockPrs,ref numOfBioms);
 
         //BIOM 5
-        NewBiom(90,25,0,50,0,0,100,ref blockPrs,ref numOfBioms);
+        NewBiom(90,25,75,100,0,0,0,ref blockPrs,ref numOfBioms);
 
         //BIOM 6
-        NewBiom(85,25,50,75,0,0,100,ref blockPrs,ref numOfBioms);
+        NewBiom(85,25,50,75,100,0,0,ref blockPrs,ref numOfBioms);
         
         //BIOM 7
-        NewBiom(85,20,40,60,80,0,100,ref blockPrs,ref numOfBioms);
+        NewBiom(80,20,40,60,80,100,0,ref blockPrs,ref numOfBioms);
 
 
         //    ids = new Queue<int>();
@@ -70,7 +78,7 @@ public class Generator : MonoBehaviour {
 
     void GenerateChunk()
     {
-        if(level == 1 && biom == 0){ 
+        if(level == 2 && biom == 0){ 
             ++level;
             ++biom;
         }
@@ -82,7 +90,7 @@ public class Generator : MonoBehaviour {
                 level = 0;
             }
         }
-        Debug.Log("Current level: "+level+", Biom: "+biom);
+        //Debug.Log("Current level: "+level+", Biom: "+biom);
         for (int j = 20; j < 24; ++j) 
         {
             for (int i = 0; i < 8; ++i)
@@ -148,25 +156,21 @@ public class Generator : MonoBehaviour {
                             (obj as GameObject).GetComponent<Renderer>().material = redMat;
                             (obj as GameObject).AddComponent<ActivatedBlockBehaviour>();
                         }
-                        else if (rColor < (float)blockPrs[biom][4] / 100)
-                        {
-                            (obj as GameObject).GetComponent<Renderer>().material = greyMat;
-                            (obj as GameObject).AddComponent<DisabledBlockBehaviour>();
+                        else if (rColor < (float)blockPrs[biom][4] / 100) {
+                            (obj as GameObject).GetComponent<Renderer>().material = yellowMat;
+                            (obj as GameObject).AddComponent<BlockBehaviour>();
                         }
                         else if (rColor < (float)blockPrs[biom][5] / 100)
                         {
                             (obj as GameObject).GetComponent<Renderer>().material = greyMat;
-                            (obj as GameObject).AddComponent<DisabledActivatedBlockBehaviour>();
+                            (obj as GameObject).AddComponent<DisabledBlockBehaviour>();
                         }
                         else if (rColor < (float)blockPrs[biom][6] / 100)
                         {
                             (obj as GameObject).GetComponent<Renderer>().material = greyMat;
-                            (obj as GameObject).AddComponent<BouncingBlockBehaviour>();
+                            (obj as GameObject).AddComponent<DisabledActivatedBlockBehaviour>();
                         }
-                        else {
-                            (obj as GameObject).GetComponent<Renderer>().material = yellowMat;
-                            (obj as GameObject).AddComponent<BlockBehaviour>();
-                        }
+
 
                     }
                     else{
