@@ -32,5 +32,6 @@ public class healthTrigger : MonoBehaviour {
         var newValue = ball.CurrentHealth + value;
         if (newValue > 100f)
             newValue = 100f;
+        ball.CurrentHealth = newValue;
     }
 }
