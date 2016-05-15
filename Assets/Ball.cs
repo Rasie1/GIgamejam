@@ -14,18 +14,20 @@ namespace UnityStandardAssets.Vehicles.Ball
         private GameObject ballVisualMesh;
         private AudioSource[] source;
         private int score;
-        int counter = 0;
+        private int Hscore;
+        int deathCounter = 0;
 
         float r;
 
         public static float Health = 100f;
         public bool hope = true;
-        
-        
+
+        UnityEngine.UI.Text Scores;
 
         private void Start()
         {
             score = 0;
+            Hscore = PlayerPrefs.GetInt("Hscore");
             GetComponent<Rigidbody>().maxAngularVelocity = m_MaxAngularVelocity;
             //collider = gameObject.AddComponent<SphereCollider>();
             
@@ -39,18 +41,20 @@ namespace UnityStandardAssets.Vehicles.Ball
             Vector3 newScale = image.transform.localScale;
             newScale.x = scale;
             newScale.y = scale;
-            image.transform.localScale = newScale;
+            //image.transform.localScale = newScale;
 
             image.enabled = false;
+            Scores = GameObject.Find("ScoresText").GetComponent<UnityEngine.UI.Text>();
         }
 
         public void Die()
         {
-            if (counter == 0)
+            if (deathCounter == 0)
             {
                 hope = false;
                 GameObject.Find("ImageDied").GetComponent<UnityEngine.UI.Image>().enabled = true;
-                counter = 1;
+                deathCounter = 1;
+                if (score>Hscore) PlayerPrefs.SetInt("Hscore", score);
             }
 
             //ballVisualMesh.transform.localScale = new Vector3(0, 0, 0);
@@ -70,11 +74,11 @@ namespace UnityStandardAssets.Vehicles.Ball
                     Ball.Health -= 3;
                 }
             }
-            if (counter > 0) ++counter;
-            if (counter > 60)
+            if (deathCounter > 0) ++deathCounter;
+            if (deathCounter > 60)
             {
                 hope = true;
-                counter = 0;
+                deathCounter = 0;
                 Health = 100f;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
@@ -148,8 +152,8 @@ namespace UnityStandardAssets.Vehicles.Ball
             {
                 score = (int)ballVisualMesh.transform.position.y;
             }
-
-            GUI.Box ( new Rect(10, 10, 100, 20), "Scores: " +score);
+            
+            Scores.text = "Best: " + Hscore + "  Scores: " + score;
         }
         public float getHealth()
         {

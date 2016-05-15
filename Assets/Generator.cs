@@ -218,7 +218,6 @@ public class Generator : MonoBehaviour {
         for (int i = 0; i < 4; ++i)
             for (int j = 0; j < 8; ++j)
             {
-                
                 Destroy(blocks[i][j]);
             }
         var obj = GameObject.Find("AcidPool(Clone)");
