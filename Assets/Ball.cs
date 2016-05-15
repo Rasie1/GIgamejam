@@ -51,6 +51,7 @@ namespace UnityStandardAssets.Vehicles.Ball
         {
             if (deathCounter == 0)
             {
+                Instantiate(Resources.Load("WaterDrop"), this.transform.position + new Vector3(0, 0.3f, 0), new Quaternion(180, 90, 180, 0));
                 hope = false;
                 GameObject.Find("ImageDied").GetComponent<UnityEngine.UI.Image>().enabled = true;
                 deathCounter = 1;
@@ -130,8 +131,6 @@ namespace UnityStandardAssets.Vehicles.Ball
 
         void OnTriggerEnter(Collider collider)
         {
-            if (collider.gameObject.tag == "DeadPool")
-                Instantiate(Resources.Load("WaterDrop"), this.transform.position + new Vector3(0,0.3f,0), new Quaternion(180,90,180,0));
         }
 
         private void animateBounce(float sqrMagnitude)
