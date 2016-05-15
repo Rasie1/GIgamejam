@@ -9,8 +9,8 @@ public class DragShotMover : MonoBehaviour {
 	[SerializeField] private Camera cam;
 	[SerializeField] private GameObject stretchLine;
 
-	public float magBase = 2; // this is the base magnitude and the maximum length of the line drawn in the user interface
-	public float magMultiplier = 5; // multiply the line length by this to allow for higher force values to be represented by shorter lines
+	private float magBase = 2; // this is the base magnitude and the maximum length of the line drawn in the user interface
+	private float magMultiplier = 5; // multiply the line length by this to allow for higher force values to be represented by shorter lines
 	public Vector3 dragPlaneNormal = Vector3.up; // a vector describing the orientation of the drag plan relative to world-space but centered on the target
 	public SnapDir snapDirection = SnapDir.away; // force is applied either toward or away from the mouse on release
 	public ForceMode forceTypeToApply = ForceMode.VelocityChange;
