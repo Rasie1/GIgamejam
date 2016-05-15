@@ -79,7 +79,7 @@ public class DragShotMover : MonoBehaviour {
 	void  OnMouseDrag (){
 
         //Debug.Log(GetComponent<Rigidbody>().velocity.magnitude);
-        if(GetComponent<Rigidbody>().velocity.magnitude > 2){
+        if(GetComponent<Rigidbody>().velocity.magnitude > 1000){
             mouseDragging = false;
             stretchLine.GetComponent<Renderer>().enabled = false;
             return;
