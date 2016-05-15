@@ -9,8 +9,8 @@ public class DragShotMover : MonoBehaviour {
 	[SerializeField] private Camera cam;
 	[SerializeField] private GameObject stretchLine;
 
-	public float magBase = 2; // this is the base magnitude and the maximum length of the line drawn in the user interface
-	public float magMultiplier = 5; // multiply the line length by this to allow for higher force values to be represented by shorter lines
+	private float magBase = 2; // this is the base magnitude and the maximum length of the line drawn in the user interface
+	private float magMultiplier = 5; // multiply the line length by this to allow for higher force values to be represented by shorter lines
 	public Vector3 dragPlaneNormal = Vector3.up; // a vector describing the orientation of the drag plan relative to world-space but centered on the target
 	public SnapDir snapDirection = SnapDir.away; // force is applied either toward or away from the mouse on release
 	public ForceMode forceTypeToApply = ForceMode.VelocityChange;
@@ -87,6 +87,14 @@ public class DragShotMover : MonoBehaviour {
         else{
             mouseDragging = true;
         }
+        //if(GetComponent<Rigidbody>().velocity.magnitude > 2){
+        //    mouseDragging = false;
+        //    stretchLine.GetComponent<Renderer>().enabled = false;
+        //    return;
+        //}
+        //else{
+        //    mouseDragging = true;
+        //}
 		Vector3 pos = Input.mousePosition;
 		pos.z = 0;
 		pos = cam.ScreenToWorldPoint(pos);
@@ -134,18 +142,21 @@ public class DragShotMover : MonoBehaviour {
         var force = snapD * forceVector;
 		GetComponent<Rigidbody>().AddForce(force, forceTypeToApply);
 
-        float jumpCost = 18f * force.sqrMagnitude / 100f;
+        float maxJumpCost = 18f;
+        float jumpCost = maxJumpCost * force.sqrMagnitude / 100f;
  
 		if (overrideVelocity) {
 			// cancel existing velocity
 			GetComponent<Rigidbody>().AddForce(-GetComponent<Rigidbody>().velocity, ForceMode.VelocityChange);
-            Ball.Health -= jumpCost;
             if (Ball.Health < jumpCost)
             {
-                Ball.Health = 1;
                 var ball = FindObjectOfType<Ball>();
-                ball.Die();
+                //ball.Die();
+                ball.ActivateLastChanceMode();
             }
+            Ball.Health -= jumpCost;
+            if (Ball.Health < maxJumpCost)
+                GameObject.Find("ImageLastChance").GetComponent<UnityEngine.UI.Image>().enabled = true;
  
 		}
  

@@ -13,22 +13,6 @@ namespace Assets
 
         // Other code.
 
-        public void ScaleInput()
-        {
-            float scaleInput = _scaleField;
-        }
-
-        public void SpeedInput()
-        {
-            float speedInput = _speedField;
-        }
-
-        public void RecalcNormalsInput()
-        {
-            bool recalculateNormalsInput = _recalculateNormalsField;
-        }
-
-
         private GameObject _sphere;
         private Vector3[] _baseVertices;
         private Perlin noise = new Perlin();

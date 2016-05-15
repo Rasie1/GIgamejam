@@ -29,10 +29,10 @@ public class Generator : MonoBehaviour {
         level = 0;
 
         biom = 0;
-        blockPrs = new int[9][];
+        blockPrs = new int[18][];
         numOfBioms = 0;
 
-        //D.N.O
+        //D.N.O - use for testing
         NewBiom(
             0, //percentage of white blocks
             0, //green
@@ -46,26 +46,53 @@ public class Generator : MonoBehaviour {
         //WHITE BIOM
         NewBiom(100,0,0,0,0,0,0,ref blockPrs,ref numOfBioms);
 
-        //BIOM 1
+        //BIOM 1 - all green
         NewBiom(95,100,0,0,0,0,0,ref blockPrs,ref numOfBioms);
 
-        //BIOM 2
+        //BIOM 2 - more green fewer red
         NewBiom(90,75,0,100,0,0,0,ref blockPrs,ref numOfBioms);
 
-        //BIOM 3
+        //BIOM 3 - green\red equal
         NewBiom(90,50,0,100,0,0,0,ref blockPrs,ref numOfBioms);
 
-        //BIOM 4
-        NewBiom(90,25,100,75,0,0,0,ref blockPrs,ref numOfBioms);
+        //BIOM 4 - green\red\blue
+        NewBiom(90,33,67,100,0,0,0,ref blockPrs,ref numOfBioms);
 
-        //BIOM 5
+        //BIOM 5 - green\red, more blue
         NewBiom(90,25,75,100,0,0,0,ref blockPrs,ref numOfBioms);
 
-        //BIOM 6
+        //BIOM 6 - green\red\blue\yellow
         NewBiom(85,25,50,75,100,0,0,ref blockPrs,ref numOfBioms);
-        
-        //BIOM 7
+
+        //BIOM 7 - blue\red, more yellow
+        NewBiom(85,0,25,50,100,0,0,ref blockPrs,ref numOfBioms);
+
+        //BIOM 8 - blue\red\yellow\gray
+        NewBiom(85,25,50,0,75,100,0,ref blockPrs,ref numOfBioms);
+
+        //BIOM 10 - red\yellow more gray
+        NewBiom(85,0,25,0,50,100,0,ref blockPrs,ref numOfBioms);
+
+        //BIOM 11 - green\blue\yellow\gray
+        NewBiom(80,25,50,0,75,100,0,ref blockPrs,ref numOfBioms);
+
+        //BIOM 12 - blue\red\yellow\gray
+        NewBiom(80,0,25,50,75,100,0,ref blockPrs,ref numOfBioms);
+
+        //BIOM 13 - green\red\yellow\gray
+        NewBiom(80,25,0,50,75,100,0,ref blockPrs,ref numOfBioms);
+
+        //BIOM 14 - green\red\blue\yellow\gray
         NewBiom(80,20,40,60,80,100,0,ref blockPrs,ref numOfBioms);
+
+        //BIOM 15 - AAAAARGH
+        NewBiom(75,20,40,60,80,100,0,ref blockPrs,ref numOfBioms);
+
+        //BIOM 16 - all yellow
+        NewBiom(80,0,0,0,100,0,0,ref blockPrs,ref numOfBioms);
+
+        //BIOM 17 - HOLY SHIT
+        NewBiom(70,20,40,60,80,100,0,ref blockPrs,ref numOfBioms);
 
 
         //    ids = new Queue<int>();
