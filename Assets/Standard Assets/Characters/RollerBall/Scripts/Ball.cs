@@ -14,6 +14,7 @@ namespace UnityStandardAssets.Vehicles.Ball
         private GameObject ballVisualMesh;
         private AudioSource[] source;
         private int score;
+        int counter = 0;
 
         float r;
 
@@ -30,16 +31,27 @@ namespace UnityStandardAssets.Vehicles.Ball
             ballVisualMesh = GameObject.Find("BallVisualMesh");
 
             source = ballVisualMesh.GetComponents<AudioSource>();
+
+            GameObject.Find("ImageDied").GetComponent<UnityEngine.UI.Image>().enabled = false;
         }
 
         public void Die()
         {
             Debug.Log("YOU DIED");
-            UnityEngine.UI.Text text = GameObject.Find("TextOfDeath").GetComponent<UnityEngine.UI.Text>();
-            text.color = new Color(0f, 0f, 0f, 1f);
-            Health = 100f;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            if (counter == 0)
+            {
+                GameObject.Find("ImageDied").GetComponent<UnityEngine.UI.Image>().enabled = true;
+            }
+            else if (counter > 100)
+            {
+                counter = 0;
+                Health = 100f;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+            ++counter;
         }
+
+  
         private void Update()
         {
             ballVisualMesh.transform.position = this.transform.position;
@@ -86,10 +98,12 @@ namespace UnityStandardAssets.Vehicles.Ball
             //        Ani.Mate.From(scaleParent.transform, 1, {"localScale": newScale, "easing": Ani.Easing.Elastic, "direction": Ani.Easing.Out});
         }
         void  OnGUI (){
-            if(score < (int)ballVisualMesh.transform.position.y)
+            if (score < (int)ballVisualMesh.transform.position.y)
+            {
                 score = (int)ballVisualMesh.transform.position.y;
+            }
 
-            GUI.Box ( new Rect(10, 10, 100, 20), "Score: "+score);
+            GUI.Box ( new Rect(10, 10, 100, 20), "Scores: " +score);
         }
     }
 }
