@@ -34,7 +34,7 @@ namespace UnityStandardAssets.Vehicles.Ball
             source = ballVisualMesh.GetComponents<AudioSource>();
 
             UnityEngine.UI.Image image = GameObject.Find("ImageDied").GetComponent<UnityEngine.UI.Image>();
-            GameObject.Find("ImageLastChance").GetComponent<UnityEngine.UI.Image>().enabled = false;
+            //GameObject.Find("ImageLastChance").GetComponent<UnityEngine.UI.Image>().enabled = false;
             float scale = Screen.width / image.rectTransform.rect.width;
             Vector3 newScale = image.transform.localScale;
             newScale.x = scale;
@@ -53,7 +53,7 @@ namespace UnityStandardAssets.Vehicles.Ball
                 counter = 1;
             }
 
-            ballVisualMesh.transform.localScale = new Vector3(0, 0, 0);
+            //ballVisualMesh.transform.localScale = new Vector3(0, 0, 0);
         }
 
         private int lastChanceDamageCounter = 0;
