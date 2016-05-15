@@ -164,8 +164,7 @@ public class DragShotMover : MonoBehaviour {
 	
 	void  OnGUI (){
 		if (mouseDragging) {
-			Vector2 guiMouseCoord = GUIUtility.ScreenToGUIPoint(Input.mousePosition);
-			GUI.Box ( new Rect(guiMouseCoord.x-30, Screen.height-guiMouseCoord.y+15, 100, 20), "force: "+Mathf.Round((forceVector).magnitude));
+			int deleteme = 0;
 		}
 	}
 }
