@@ -20,12 +20,17 @@ public class healthTrigger : MonoBehaviour {
     void OnTriggerEnter(Collider myTrigger)
     { 
         AddHealth(healthPackValue);
+        var ball = FindObjectOfType<Ball>();
+        ball.SucceedLastChance();
         source[3].Play();
         gameObject.transform.position = new Vector3(100000, 0, 0);
     }
 
     public static void AddHealth(float value)
     {
-        Ball.Health += (Ball.Health <= 100) ? healthPackValue : 1;
+        var ball = GameObject.FindObjectOfType<Ball>();
+        var newValue = ball.CurrentHealth + value;
+        if (newValue > 100f)
+            newValue = 100f;
     }
 }

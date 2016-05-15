@@ -79,7 +79,7 @@ public class DragShotMover : MonoBehaviour {
 	void  OnMouseDrag (){
 
         //Debug.Log(GetComponent<Rigidbody>().velocity.magnitude);
-        if(GetComponent<Rigidbody>().velocity.magnitude > 2){
+        if(GetComponent<Rigidbody>().velocity.magnitude > 1000){
             mouseDragging = false;
             stretchLine.GetComponent<Renderer>().enabled = false;
             return;
@@ -87,6 +87,14 @@ public class DragShotMover : MonoBehaviour {
         else{
             mouseDragging = true;
         }
+        //if(GetComponent<Rigidbody>().velocity.magnitude > 2){
+        //    mouseDragging = false;
+        //    stretchLine.GetComponent<Renderer>().enabled = false;
+        //    return;
+        //}
+        //else{
+        //    mouseDragging = true;
+        //}
 		Vector3 pos = Input.mousePosition;
 		pos.z = 0;
 		pos = cam.ScreenToWorldPoint(pos);
@@ -134,18 +142,24 @@ public class DragShotMover : MonoBehaviour {
         var force = snapD * forceVector;
 		GetComponent<Rigidbody>().AddForce(force, forceTypeToApply);
 
-        float jumpCost = 18f * force.sqrMagnitude / 100f;
- 
+        float maxJumpCost = 18f;
+        float jumpCost = maxJumpCost * force.sqrMagnitude / 100f;
+
+
+
 		if (overrideVelocity) {
 			// cancel existing velocity
 			GetComponent<Rigidbody>().AddForce(-GetComponent<Rigidbody>().velocity, ForceMode.VelocityChange);
-            Ball.Health -= jumpCost;
-            if (Ball.Health < jumpCost)
+            var ball = GameObject.FindObjectOfType<Ball>();
+
+            if (ball.CurrentHealth < jumpCost)
             {
-                Ball.Health = 1;
-                var ball = FindObjectOfType<Ball>();
-                ball.Die();
+                //ball.Die();
+                ball.ActivateLastChanceMode();
             }
+            ball.CurrentHealth -= jumpCost;
+            if (ball.CurrentHealth < maxJumpCost)
+                GameObject.Find("ImageLastChance").GetComponent<UnityEngine.UI.Image>().enabled = true;
  
 		}
  
@@ -161,8 +175,7 @@ public class DragShotMover : MonoBehaviour {
 	
 	void  OnGUI (){
 		if (mouseDragging) {
-			Vector2 guiMouseCoord = GUIUtility.ScreenToGUIPoint(Input.mousePosition);
-			GUI.Box ( new Rect(guiMouseCoord.x-30, Screen.height-guiMouseCoord.y+15, 100, 20), "force: "+Mathf.Round((forceVector).magnitude));
+			int deleteme = 0;
 		}
 	}
 }

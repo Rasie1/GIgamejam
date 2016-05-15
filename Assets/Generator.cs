@@ -128,7 +128,6 @@ public class Generator : MonoBehaviour {
             {
                 
                 //Debug.Log(Instantiate(Resources.Load("Cube") as GameObject, new Vector3(-3.5f, -5 + height, -2.5f + 0.7f * i), Quaternion.identity).GetInstanceID());
-                int id = 0;
                 float r = Random.value;
                 float rColor = Random.value;
                 if (!blocks[j][i])
@@ -218,9 +217,14 @@ public class Generator : MonoBehaviour {
         for (int i = 0; i < 4; ++i)
             for (int j = 0; j < 8; ++j)
             {
-                
                 Destroy(blocks[i][j]);
             }
+        var obj = GameObject.Find("AcidPool(Clone)");
+        if (obj)
+            Destroy(obj);
+        var quat = new Quaternion(0, 0, 0, 0);
+        quat.SetEulerRotation(0, 0, -0.8f);
+        Instantiate(Resources.Load("AcidPool"), new Vector3(6.0f, height - 0.7f * 40.4f, 0), quat);
     }
 
     void UpdateInfo()
