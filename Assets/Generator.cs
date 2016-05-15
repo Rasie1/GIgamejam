@@ -36,11 +36,11 @@ public class Generator : MonoBehaviour {
         NewBiom(
             0, //percentage of white blocks
             0, //green
-            0, //blue
+            100, //blue
             0, //red
             0, // yellow
             0,//gray1
-            100, //gray2
+            0, //gray2
             ref blockPrs,ref numOfBioms);
 
         //WHITE BIOM
@@ -162,7 +162,7 @@ public class Generator : MonoBehaviour {
                         }
                         else if (rColor < (float)blockPrs[biom][4] / 100) {
                             (obj as GameObject).GetComponent<Renderer>().material = yellowMat;
-                            (obj as GameObject).AddComponent<BlockBehaviour>();
+                            (obj as GameObject).AddComponent<AlternatingBlockBehaviour>();
                         }
                         else if (rColor < (float)blockPrs[biom][5] / 100)
                         {

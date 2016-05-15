@@ -4,8 +4,11 @@ using System.Collections;
 public class BlockBehaviour : MonoBehaviour {
 
     private bool isActivated;
-    private Vector3 deactivatedPosition;
-    private Vector3 activatedPosition;
+    public Vector3 deactivatedPosition;
+    public Vector3 activatedPosition;
+    private AudioSource sound;
+
+    public bool bDontActivate;
 
     public float ActivationMoveSpeed = 10;
     private float ActivationOffset = -2;
@@ -22,7 +25,8 @@ public class BlockBehaviour : MonoBehaviour {
                 if (!isActivated)
                 {
                     isActivated = true;
-                    Activate();
+                    if(!bDontActivate)
+                        Activate();
                 }
             }
             else
@@ -30,19 +34,20 @@ public class BlockBehaviour : MonoBehaviour {
                 if (isActivated)
                 {
                     isActivated = false;
-                    Deactivate();
+                    if(!bDontActivate)
+                        Deactivate();
                 }
             }
         }
     }
 
     protected virtual void Activate() {
-        //Debug.Log("Activated");
+        sound.Play();
     }
 
     protected virtual void Deactivate()
     {
-        //Debug.Log("Deactivated");
+        sound.Play();
     }
 
     protected virtual void Init()
@@ -50,6 +55,7 @@ public class BlockBehaviour : MonoBehaviour {
         IsActivated = false;
         deactivatedPosition = this.transform.position;
         activatedPosition.Set(ActivationOffset, this.transform.position.y, this.transform.position.z);
+        sound = GetComponent<AudioSource>();
     }
 
 	void Start () {
