@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityStandardAssets.Vehicles.Ball;
 
 public class BallCamera : MonoBehaviour {
 
@@ -13,6 +14,7 @@ public class BallCamera : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (FindObjectOfType<Ball>().getHealth() <= 0 || !FindObjectOfType<Ball>().hope) return;
 		newPos.x = transform.position.x;
 		newPos.y = m_Rigidbody.position.y;
 		newPos.z = 0;
