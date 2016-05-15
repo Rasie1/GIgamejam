@@ -29,9 +29,10 @@ public class Generator : MonoBehaviour {
         level = 0;
 
         biom = 0;
-        blockPrs = new int[8][];
+        blockPrs = new int[9][];
         numOfBioms = 0;
 
+        //D.N.O
         NewBiom(
             0, //percentage of white blocks
             0, //green
@@ -41,6 +42,9 @@ public class Generator : MonoBehaviour {
             0,//gray1
             100, //gray2
             ref blockPrs,ref numOfBioms);
+
+        //WHITE BIOM
+        NewBiom(100,0,0,0,0,0,0,ref blockPrs,ref numOfBioms);
 
         //BIOM 1
         NewBiom(95,100,0,0,0,0,0,ref blockPrs,ref numOfBioms);
@@ -78,8 +82,8 @@ public class Generator : MonoBehaviour {
 
     void GenerateChunk()
     {
-        if(level == 2 && biom == 0){ 
-            ++level;
+        if((level == 2 && biom == 0) || (level == 5 && biom == 1)){ 
+            level = 0;
             ++biom;
         }
         else{
@@ -154,7 +158,7 @@ public class Generator : MonoBehaviour {
                         else if (rColor < (float)blockPrs[biom][3] / 100)
                         {
                             (obj as GameObject).GetComponent<Renderer>().material = redMat;
-                            (obj as GameObject).AddComponent<ActivatedBlockBehaviour>();
+                            (obj as GameObject).AddComponent<TemporaryActivatedBlockBehavior>();
                         }
                         else if (rColor < (float)blockPrs[biom][4] / 100) {
                             (obj as GameObject).GetComponent<Renderer>().material = yellowMat;
