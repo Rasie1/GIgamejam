@@ -68,7 +68,6 @@ namespace UnityStandardAssets.Vehicles.Ball
 
             var vel = GetComponent<Rigidbody>().velocity;
             ballVisualMesh.transform.up = vel;
-            var scale = ballVisualMesh.transform.localScale;
             var mag = vel.magnitude;
             var width = System.Math.Min(5 / mag, 1);
             var hpCoeff = Ball.Health / 100f;
