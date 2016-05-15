@@ -34,6 +34,7 @@ namespace UnityStandardAssets.Vehicles.Ball
             source = ballVisualMesh.GetComponents<AudioSource>();
 
             UnityEngine.UI.Image image = GameObject.Find("ImageDied").GetComponent<UnityEngine.UI.Image>();
+            GameObject.Find("ImageLastChance").GetComponent<UnityEngine.UI.Image>().enabled = false;
             float scale = Screen.width / image.rectTransform.rect.width;
             Vector3 newScale = image.transform.localScale;
             newScale.x = scale;
@@ -51,18 +52,40 @@ namespace UnityStandardAssets.Vehicles.Ball
                 GameObject.Find("ImageDied").GetComponent<UnityEngine.UI.Image>().enabled = true;
                 counter = 1;
             }
+
+            ballVisualMesh.transform.localScale = new Vector3(0, 0, 0);
         }
 
-  
-        private void Update()
+        private int lastChanceDamageCounter = 0;
+        private int lastChanceDamageDelay = 15;
+
+        private void FixedUpdate()
         {
+            if (isLastChanceActive)
+            {
+                --lastChanceDamageCounter;
+                if (lastChanceDamageCounter == 0)
+                {
+                    lastChanceDamageCounter = lastChanceDamageDelay;
+                    Ball.Health -= 3;
+                }
+            }
             if (counter > 0) ++counter;
-            if (counter>60)
+            if (counter > 60)
             {
                 hope = true;
                 counter = 0;
                 Health = 100f;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+        }
+  
+        private void Update()
+        {
+            if (Ball.Health < 1)
+            {
+                Die();
+                isLastChanceActive = false;
             }
             ballVisualMesh.transform.position = this.transform.position;
 
@@ -70,7 +93,7 @@ namespace UnityStandardAssets.Vehicles.Ball
             ballVisualMesh.transform.up = vel;
             var mag = vel.magnitude;
             var width = System.Math.Min(5 / mag, 1);
-            var hpCoeff = Ball.Health / 100f;
+            var hpCoeff = 0.1f + Ball.Health / 100f;
             ballVisualMesh.transform.localScale = new Vector3(width * hpCoeff, (mag / 10 + 1) * hpCoeff, width * hpCoeff);
             width = System.Math.Max(width, 0.5f);
             GameObject.Find("Ball").GetComponent<SphereCollider>().radius = width * hpCoeff * 0.55f;
@@ -78,7 +101,6 @@ namespace UnityStandardAssets.Vehicles.Ball
 
             float offset = Convert.ToSingle(Time.time);
             GetComponent<Renderer>().material.SetTextureOffset("_MainTex", new Vector2(offset,0));
-
         }
 
         void OnCollisionEnter(Collision collision)
@@ -125,6 +147,15 @@ namespace UnityStandardAssets.Vehicles.Ball
         public float getHealth()
         {
             return Health;
+        }
+
+        private bool isLastChanceActive = false;
+
+        public void ActivateLastChanceMode()
+        {
+            Ball.Health = 25;
+            isLastChanceActive = true;
+            lastChanceDamageCounter = lastChanceDamageDelay;
         }
     }
 }
