@@ -84,6 +84,14 @@ namespace UnityStandardAssets.Vehicles.Ball
 
         void OnCollisionEnter(Collision collision)
         {
+            if(collision.gameObject.GetComponent<BouncingBlockBehaviour>()){
+                Vector3 newVelocity;
+                newVelocity.x = GetComponent<Rigidbody>().velocity.x*1.5f;
+                newVelocity.y = GetComponent<Rigidbody>().velocity.y*1.5f;
+                newVelocity.z = GetComponent<Rigidbody>().velocity.z*1.5f;
+                GetComponent<Rigidbody>().velocity =  newVelocity;
+                Debug.Log(newVelocity);
+            };
             if(collision.relativeVelocity.magnitude<5){
                 source[0].Play();
             }
